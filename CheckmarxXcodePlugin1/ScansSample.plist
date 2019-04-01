@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>Attrs</key>
+		<string>Synchronous:true,Project:PHP-Mailer,EngineConfig:Default Configuration,GenerateReport:true,ReportType:xml,CxXcodeWSDocFilespec:/public_hda2/JWeb.Software/JWeb_MacOSx_apps/SourceEditorExtensions/CheckmarxXcodePlugin1/CheckmarxXcodePlugin1/CheckmarxXcodePlugin1.xcodeproj</string>
+		<key>Completed</key>
+		<string>false</string>
+		<key>Due In</key>
+		<string>0</string>
+		<key>FullScan</key>
+		<string>true</string>
+		<key>Title</key>
+		<string>Sample Scan #1</string>
+	</dict>
+	<dict>
+		<key>Attrs</key>
+		<string>Synchronous:false,Project:SampleScan2,CxXcodeWSDocFilespec:/public_hda2/JWeb.Software/JWeb_MacOSx_apps/Swift_Command_line_tools/HelloSwift4WithJNI/HelloSwift4WithJNI/HelloSwift4WithJNI.xcodeproj</string>
+		<key>Completed</key>
+		<string>false</string>
+		<key>Due In</key>
+		<string>0</string>
+		<key>FullScan</key>
+		<string>true</string>
+		<key>Title</key>
+		<string>Sample Scan #2</string>
+	</dict>
+</array>
+</plist>

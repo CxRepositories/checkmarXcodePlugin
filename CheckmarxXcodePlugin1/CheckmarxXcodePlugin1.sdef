@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dictionary SYSTEM "file://localhost/System/Library/DTDs/sdef.dtd">
+
+<dictionary title="ScriptTest Terminology">
+
+  <suite name="Standard Suite" code="????" description="Common classes and commands for all applications.">
+
+    <command name="count" code="corecnte" description="Return the number of elements of a particular class within an object.">
+      <cocoa class="NSCountCommand"/>
+      <access-group identifier="*"/>
+      <direct-parameter type="specifier" requires-access="r" description="The objects to be counted."/>
+      <parameter name="each" code="kocl" type="type" optional="yes" description="The class of objects to be counted." hidden="yes">
+        <cocoa key="ObjectClass"/>
+      </parameter>
+      <result type="integer" description="The count."/>
+    </command>
+
+    <command name="delete" code="coredelo" description="Delete an object.">
+      <cocoa class="NSDeleteCommand"/>
+      <access-group identifier="*"/>
+      <direct-parameter type="specifier" description="The object(s) to delete."/>
+    </command>
+
+    <command name="duplicate" code="coreclon" description="Copy an object.">
+      <cocoa class="NSCloneCommand"/>
+      <access-group identifier="*"/>
+      <direct-parameter type="specifier" requires-access="r" description="The object(s) to copy."/>
+      <parameter name="to" code="insh" type="location specifier" description="The location for the new copy or copies." optional="yes">
+        <cocoa key="ToLocation"/>
+      </parameter>
+      <parameter name="with properties" code="prdt" type="record" description="Properties to set in the new copy or copies right away." optional="yes">
+        <cocoa key="WithProperties"/>
+      </parameter>
+    </command>
+
+    <command name="exists" code="coredoex" description="Verify that an object exists.">
+      <cocoa class="NSExistsCommand"/>
+      <access-group identifier="*"/>
+      <direct-parameter type="any" requires-access="r" description="The object(s) to check."/>
+      <result type="boolean" description="Did the object(s) exist?"/>
+    </command>
+
+    <command name="make" code="corecrel" description="Create a new object.">
+      <cocoa class="NSCreateCommand"/>
+      <access-group identifier="*"/>
+      <parameter name="new" code="kocl" type="type" description="The class of the new object.">
+        <cocoa key="ObjectClass"/>
+      </parameter>
+      <parameter name="at" code="insh" type="location specifier" optional="yes" description="The location at which to insert the object.">
+        <cocoa key="Location"/>
+      </parameter>
+      <parameter name="with data" code="data" type="any" optional="yes" description="The initial contents of the object.">
+        <cocoa key="ObjectData"/>
+      </parameter>
+      <parameter name="with properties" code="prdt" type="record" optional="yes" description="The initial values for properties of the object.">
+        <cocoa key="KeyDictionary"/>
+      </parameter>
+      <result type="specifier" description="The new object."/>
+    </command>
+
+    <class name="application" code="capp" description="The application's top-level scripting object.">
+      <cocoa class="NSApplication"/>
+      <property name="name" code="pnam" type="text" access="r" description="The name of the application."/>
+      <property name="frontmost" code="pisf" type="boolean" access="r" description="Is this the active application?">
+        <cocoa key="isActive"/>
+      </property>
+      <property name="version" code="vers" type="text" access="r" description="The version number of the application."/>
+      <element type="window" access="r">
+        <cocoa key="orderedWindows"/>
+      </element>
+      <responds-to command="open">
+        <cocoa method="handleOpenScriptCommand:"/>
+      </responds-to>
+      <responds-to command="print">
+        <cocoa method="handlePrintScriptCommand:"/>
+      </responds-to>
+      <responds-to command="quit">
+        <cocoa method="handleQuitScriptCommand:"/>
+      </responds-to>
+    </class>
+
+    <class name="window" code="cwin" description="A window.">
+      <cocoa class="NSWindow"/>
+      <property name="name" code="pnam" type="text" access="r" description="The title of the window.">
+        <cocoa key="title"/>
+      </property>
+      <property name="id" code="ID  " type="integer" access="r" description="The unique identifier of the window.">
+        <cocoa key="uniqueID"/>
+      </property>
+      <property name="index" code="pidx" type="integer" description="The index of the window, ordered front to back.">
+        <cocoa key="orderedIndex"/>
+      </property>
+      <property name="bounds" code="pbnd" type="rectangle" description="The bounding rectangle of the window.">
+        <cocoa key="boundsAsQDRect"/>
+      </property>
+      <property name="closeable" code="hclb" type="boolean" access="r" description="Does the window have a close button?">
+        <cocoa key="hasCloseBox"/>
+      </property>
+      <property name="miniaturizable" code="ismn" type="boolean" access="r" description="Does the window have a minimize button?">
+        <cocoa key="isMiniaturizable"/>
+      </property>
+      <property name="miniaturized" code="pmnd" type="boolean" description="Is the window minimized right now?">
+        <cocoa key="isMiniaturized"/>
+      </property>
+      <property name="resizable" code="prsz" type="boolean" access="r" description="Can the window be resized?">
+        <cocoa key="isResizable"/>
+      </property>
+      <property name="visible" code="pvis" type="boolean" description="Is the window visible right now?">
+        <cocoa key="isVisible"/>
+      </property>
+      <property name="zoomable" code="iszm" type="boolean" access="r" description="Does the window have a zoom button?">
+        <cocoa key="isZoomable"/>
+      </property>
+      <property name="zoomed" code="pzum" type="boolean" description="Is the window zoomed right now?">
+        <cocoa key="isZoomed"/>
+      </property>
+    </class>
+
+  </suite>
+
+  <suite name="CheckmarxXcodePlugin1 Suite" code="CxXp" description="CheckmarxXcodePlugin1 suite.">
+
+    <class name="application" code="capp" description="An application's top level scripting object.">
+      <cocoa class="NSApplication"/>
+      <element type="scan" access="r">
+        <cocoa key="scans"/>
+      </element>
+      <element type="bind" access="r">
+        <cocoa key="binds"/>
+      </element>
+    </class>
+
+    <command name="mark" code="CxXpMark">
+      <direct-parameter description="One scan" type="scan"/>
+      <parameter name="as" code="MARK" description="'complete' or 'not complete'" type="text">
+        <cocoa key="completedFlag"/>
+      </parameter>
+    </command>
+
+    <command name="submit" code="CxXpSubM">
+      <direct-parameter description="One scan" type="scan"/>
+      <parameter name="as" code="SUBM" description="'full' or 'incremental'" type="text">
+        <cocoa key="fullScanFlag"/>
+      </parameter>
+    </command>
+
+    <command name="tagOrigin" code="CxXpTagO">
+      <direct-parameter description="One bind" type="bind"/>
+      <parameter name="as" code="TAGO" description="'bind' origin tag" type="text">
+        <cocoa key="bindOriginSrc"/>
+      </parameter>
+    </command>
+
+    <command name="viewLastSASTScanReport" code="CxXpLsSr">
+      <direct-parameter description="One bind" type="bind"/>
+    </command>
+
+    <command name="handleBindOrUnbind" code="CxXpBdUd">
+      <direct-parameter description="One bind" type="bind"/>
+    </command>
+
+    <class name="scan" code="ScAn" description="A scan item" inherits="item" plural="scans">
+
+      <cocoa class="Scan"/>
+
+      <property name="id" code="ID  " type="text" access="r"
+        description="The unique identifier of the scan.">
+        <cocoa key="id"/>
+      </property>
+
+      <property name="name" code="pnam" type="text" access="rw"
+        description="The title of the scan.">
+        <cocoa key="title"/>
+      </property>
+
+      <property name="daysUntilDue" code="CrDa" type="number" access="rw"
+      description="The number of days before this scan is due."/>
+
+      <property name="completed" code="TrFa" type="boolean" access="rw"
+      description="Has the scan been completed?"/>
+
+      <property name="fullScan" code="FlSn" type="boolean" access="rw"
+      description="Is this a 'full' scan?"/>
+
+      <element type="attr" access="rw">
+        <cocoa key="attrs"/>
+      </element>
+
+      <responds-to command="mark">
+        <cocoa method="markAsCompleted:"/>
+      </responds-to>
+      
+      <responds-to command="submit">
+        <cocoa method="submitAsIndicated:"/>
+      </responds-to>
+      
+    </class>
+    
+    <class name="attr" code="AtTr" description="A attrribute" inherits="item" plural="attrs">
+
+      <cocoa class="Attr"/>
+
+      <property name="id" code="ID  " type="text" access="r"
+        description="The unique identifier of the attr.">
+        <cocoa key="uniqueID"/>
+      </property>
+
+      <property name="name" code="pnam" type="text" access="rw"
+        description="The name of the attr.">
+        <cocoa key="name"/>
+      </property>
+
+      <property name="value" code="AtVl" type="text" access="rw"
+        description="The value of the attr.">
+        <cocoa key="value"/>
+      </property>
+
+    </class>
+
+    <class name="bind" code="BiNd" description="A bind item" inherits="item" plural="binds">
+
+      <cocoa class="Bind"/>
+
+      <property name="id" code="ID  " type="text" access="r"
+        description="The unique identifier of the bind.">
+        <cocoa key="id"/>
+      </property>
+
+      <property name="key" code="BKey" type="text" access="rw"
+        description="The key of the bind (fully-qualified Xcode project file or Directory).">
+        <cocoa key="key"/>
+      </property>
+
+      <property name="cxEndpointKey" code="EpKy" type="text" access="rw"
+      description="The Checkmarx Endpoint Key (Name)."/>
+
+      <property name="cxProjectName" code="PrNm" type="text" access="rw"
+      description="The Checkmarx Project Name."/>
+
+      <property name="cxProjectId" code="PrId" type="number" access="rw"
+      description="The Checkmarx Project Id."/>
+
+      <property name="cxBindOrigin" code="PrOg" type="text" access="rw"
+      description="The Checkmarx 'bind' Origin."/>
+
+      <property name="cxLastSASTScanReportFilespec" code="LsSr" type="text" access="r"
+      description="The Checkmarx 'bind' Last SAST Scan Report filespec."/>
+
+      <property name="bCxBindGenerateReport" code="BnRp" type="boolean" access="rw"
+      description="Should the scan generate a Report?"/>
+
+      <property name="cxBindReportType" code="RpTy" type="text" access="rw"
+      description="The Checkmarx 'bind' Report Type ('pdf'/'xml')."/>
+
+      <responds-to command="tagOrigin">
+        <cocoa method="tagBindOrigin:"/>
+      </responds-to>
+      
+      <responds-to command="viewLastSASTScanReport">
+        <cocoa method="viewBindLastSASTScanReport:"/>
+      </responds-to>
+      
+      <responds-to command="handleBindOrUnbind">
+        <cocoa method="handleBindOrUnbind:"/>
+      </responds-to>
+      
+    </class>
+    
+  </suite>
+  
+</dictionary>
