@@ -1,5 +1,5 @@
 //
-//  CheckmarxXcodeApp1Bridge.swift - v1.0401
+//  CheckmarxXcodeApp1Bridge.swift - v1.0402
 //  Swift-AppleScriptObjC
 //
 

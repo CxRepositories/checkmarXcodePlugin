@@ -1,5 +1,5 @@
 
--- CheckmarxXcodeApp1Bridge - v1.0401
+-- CheckmarxXcodeApp1Bridge - v1.0402
 
 use framework "Foundation"
 use scripting additions

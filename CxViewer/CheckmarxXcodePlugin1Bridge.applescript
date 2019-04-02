@@ -1,5 +1,5 @@
 
--- CheckmarxXcodePlugin1Bridge - v1.0401
+-- CheckmarxXcodePlugin1Bridge - v1.0402
 
 script CheckmarxXcodePlugin1Bridge
 	

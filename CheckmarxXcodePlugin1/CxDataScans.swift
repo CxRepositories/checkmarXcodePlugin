@@ -15,7 +15,7 @@ class CxDataScans: NSObject
     {
         
         static let sClsId          = "CxDataScans";
-        static let sClsVers        = "v1.0401";
+        static let sClsVers        = "v1.0402";
         static let sClsDisp        = sClsId+".("+sClsVers+"): ";
         static let sClsCopyRight   = "Copyright (C) Checkmarx 2018-2019. All Rights Reserved.";
         static let bClsTrace       = true;

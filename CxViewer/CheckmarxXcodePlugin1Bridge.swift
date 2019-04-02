@@ -1,5 +1,5 @@
 //
-//  CheckmarxXcodePlugin1Bridge.swift - v1.0401
+//  CheckmarxXcodePlugin1Bridge.swift - v1.0402
 //  Swift-AppleScriptObjC
 //
 
