@@ -220,8 +220,6 @@ class ScanProcessor: NSObject
             if (bCxAPILoginOk == false)
             {
 
-                self.restCxDataEndpoint = nil;
-
                 let sScanProcessorStatusMsg = self.restURLResponse!.toDisplayString(sRestURLStatusMsg: " - - - - - - - - - -\nThe CxAPI Sast 'scan' Request for a Scan ID of [\(self.scan!.sAppLastSASTScanId)] 'login' Request failed - Error:");
 
                 self.jsTraceLog.jsTraceLogMsg(clsName: self.sTraceCls, sTraceClsDisp:sCurrMethodDisp, sTraceClsMsg:sScanProcessorStatusMsg);
@@ -232,6 +230,8 @@ class ScanProcessor: NSObject
                     _ = AppDelegate.ClassSingleton.cxAppDelegate!.updateAppStatusView(sAppStatusView: sScanProcessorStatusMsg);
 
                 }   
+
+                self.restCxDataEndpoint = nil;
 
                 return false;
 
@@ -846,9 +846,6 @@ class ScanProcessor: NSObject
         {
 
             self.jsTraceLog.jsTraceLogMsg(clsName: self.sTraceCls, sTraceClsDisp:sCurrMethodDisp, sTraceClsMsg:"The JSON Request 'postJsonRequest' [\(postJsonRequest)] failed - 'restURLResponse' was [\(self.restURLResponse!)] - Error!");
-
-        //  self.sRestURLAccessToken = "";
-            self.restCxDataEndpoint  = nil;
 
             return false;
 

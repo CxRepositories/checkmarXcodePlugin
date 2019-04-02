@@ -89,7 +89,6 @@ class RestURLData: NSObject
         let sCurrMethod:String = #function;
         let sCurrMethodDisp    = "'"+sCurrMethod+"()'";
 
-    //  self.jsTraceLog.jsTraceLogMsg(clsName: self.sTraceCls, sTraceClsDisp:sCurrMethodDisp, sTraceClsMsg:"Invoked - 'self' [\(self.toString()))]...");
         self.jsTraceLog.jsTraceLogMsg(clsName: self.sTraceCls, sTraceClsDisp:sCurrMethodDisp, sTraceClsMsg:"Invoked - 'cxDataEndpoint' [\(self.cxDataEndpoint!.toString())] - 'sHttpURI' [\(self.sHttpURI)] - 'sHttpParams' [\(self.sHttpParams)]...");
 
         var sHttpURLPrefix = "\(self.cxDataEndpoint!.sHttpProtocol!)://\(self.cxDataEndpoint!.sHttpHost!)";
@@ -110,13 +109,6 @@ class RestURLData: NSObject
 
         }
 
-    //  if (sHttpURLPrefix.hasSuffix("/") == false)
-    //  {
-    //
-    //      sHttpURLPrefix = "\(sHttpURLPrefix)/";
-    //
-    //  }
-
         if (self.sHttpParams.count > 0)
         {
 
@@ -136,8 +128,16 @@ class RestURLData: NSObject
         let sCurrMethod:String = #function;
         let sCurrMethodDisp    = "'"+sCurrMethod+"()'";
 
-    //  self.jsTraceLog.jsTraceLogMsg(clsName: self.sTraceCls, sTraceClsDisp:sCurrMethodDisp, sTraceClsMsg:"Invoked - 'bJsonAPIQueryOk' [\(bJsonAPIQueryOk)] - 'jsonAPIReqURL' [\(String(describing: jsonAPIReqURL))] - 'iJsonAPIRespStatus' [\(iJsonAPIRespStatus)] - 'sJsonAPIRespError' [\(sJsonAPIRespError)] - 'adJsonAPIRespResult' [\(String(describing: adJsonAPIRespResult))]...");
-        self.jsTraceLog.jsTraceLogMsg(clsName: self.sTraceCls, sTraceClsDisp:sCurrMethodDisp, sTraceClsMsg:"Invoked - 'bJsonAPIQueryOk' [\(bJsonAPIQueryOk)] - 'jsonAPIReqURL' [\(String(describing: jsonAPIReqURL))] - 'iJsonAPIRespStatus' [\(iJsonAPIRespStatus)] - 'sJsonAPIRespError' [\(sJsonAPIRespError)] - 'adJsonAPIRespResult' (\(String(describing: adJsonAPIRespResult!.count))) element(s)...");
+        var cdJsonAPIRespResults = 0;
+
+        if (adJsonAPIRespResult != nil)
+        {
+
+            cdJsonAPIRespResults = adJsonAPIRespResult!.count;
+
+        }
+
+        self.jsTraceLog.jsTraceLogMsg(clsName: self.sTraceCls, sTraceClsDisp:sCurrMethodDisp, sTraceClsMsg:"Invoked - 'bJsonAPIQueryOk' [\(bJsonAPIQueryOk)] - 'jsonAPIReqURL' [\(String(describing: jsonAPIReqURL))] - 'iJsonAPIRespStatus' [\(iJsonAPIRespStatus)] - 'sJsonAPIRespError' [\(String(describing: sJsonAPIRespError))] - 'adJsonAPIRespResult' (\(cdJsonAPIRespResults)) element(s)...");
 
         self.sLastJsonAPIRequestURL = "-N/A";
 
@@ -164,8 +164,6 @@ class RestURLData: NSObject
             adJsonAPIRespResult!.count > 0)
         {
 
-        //  self.jsTraceLog.jsTraceLogMsg(clsName: self.sTraceCls, sTraceClsDisp:sCurrMethodDisp, sTraceClsMsg:"The 'deserialized' JSON result array 'adJsonAPIRespResult' contains (\(adJsonAPIRespResult!.count)) lines...");
-            
             asLastJsonAPIRespResult.append("The 'last' Json API response data contains (\(adJsonAPIRespResult!.count)) lines:");
 
             for (i, dictJsonResult) in adJsonAPIRespResult!.enumerated()
@@ -178,8 +176,6 @@ class RestURLData: NSObject
 
                     j += 1;
                     
-                //  self.jsTraceLog.jsTraceLogMsg(clsName: self.sTraceCls, sTraceClsDisp:sCurrMethodDisp, sTraceClsMsg:"JSON result #(\(i + 1):\(j)): Key [\(dictJsonKey)], Value [\(dictJsonValue)]...");
-
                     asLastJsonAPIRespResult.append("JSON result #(\(i + 1):\(j)): Key [\(dictJsonKey)], Value [\(dictJsonValue)]...");
 
                 }
@@ -187,12 +183,6 @@ class RestURLData: NSObject
             }
 
         }
-    //  else
-    //  {
-    //
-    //      asLastJsonAPIRespResult.append("The 'last' Json API response data is 'nil' or contains (0) lines.");
-    //
-    //  }
 
         self.svJsonAPIResponseStack.append(asLastJsonAPIRespResult.joined(separator: "\n"));
 

@@ -204,7 +204,7 @@ class PreferencesViewController: NSViewController, NSComboBoxDelegate
         if (cxActiveDataEndpoint == nil)
         {
 
-            self.sPrefsViewDisplay = ">>> ERROR: NO Endpoint is marked 'active' - fix this before running a scan!"; 
+            self.sPrefsViewDisplay = ">>> ERROR: NO CxServer URL is set as default - fix this before running a scan!"; 
 
         }
 
@@ -232,8 +232,8 @@ class PreferencesViewController: NSViewController, NSComboBoxDelegate
         self.asCxDataEndpointNames.removeAll();
         self.nsCBPrefsProtocolDisplay.removeAllItems();
         
-        self.nsCBPrefsProtocolDisplay.addItem(withObjectValue: "http");
-        self.nsCBPrefsProtocolDisplay.addItem(withObjectValue: "https");
+        self.nsCBPrefsProtocolDisplay.addItem(withObjectValue: "HTTP");
+        self.nsCBPrefsProtocolDisplay.addItem(withObjectValue: "HTTPS");
 
         self.nsCBPrefsProtocolDisplay.selectItem(at: 0);
 
@@ -314,6 +314,8 @@ class PreferencesViewController: NSViewController, NSComboBoxDelegate
         let sCurrMethodDisp    = "'"+sCurrMethod+"()'";
 
         self.jsTraceLog.jsTraceLogMsg(clsName: self.sTraceCls, sTraceClsDisp:sCurrMethodDisp, sTraceClsMsg:"Invoked - 'atKey' [\(atKey)]...");
+
+        self.sPrefsViewDisplay = "";
 
         let sNotificationKey:String        = atKey;
         let cxDataEndpoint:CxDataEndpoint? = CxDataRepo.sharedCxDataRepo.dictCxDataEndpoints[sNotificationKey];
@@ -398,7 +400,7 @@ class PreferencesViewController: NSViewController, NSComboBoxDelegate
 
                     self.nsTFPrefsHostDisplay.stringValue = sCurrentHttpHost.subString(startIndex: 0, length: indexOfFwdSlash); 
 
-                    self.sPrefsViewDisplay = ">>> ERROR: Endpoint contains a '/' - it and all trailing data removed..."; 
+                    self.sPrefsViewDisplay = ">>> ERROR: CxServer URL contains a '/' - it and all trailing data removed..."; 
 
                 }
 
@@ -453,7 +455,7 @@ class PreferencesViewController: NSViewController, NSComboBoxDelegate
 
         self.jsTraceLog.jsTraceLogMsg(clsName: self.sTraceCls, sTraceClsDisp:sCurrMethodDisp, sTraceClsMsg:"For the CxDataEndpoint named [\(String(describing: self.cxCurrentDataEndpoint!.sCxEndpointName))] updated from the 'prefs' view 'body'...");
 
-        self.sPrefsViewDisplay = ">>> Change(s) to the 'current' Endpoint have been applied!";
+        self.sPrefsViewDisplay = ">>> Change(s) to the CxServer URL have been applied!";
 
         self.updatePrefsViewDisplay();
 
@@ -471,7 +473,7 @@ class PreferencesViewController: NSViewController, NSComboBoxDelegate
 
         self.nsBtnPrefsEndpointApply.isEnabled = false;
 
-        self.sPrefsViewDisplay = ">>> Change(s) to the 'current' Endpoint have been cancelled!";
+        self.sPrefsViewDisplay = ">>> Change(s) to the CxServer URL have been cancelled!";
 
         self.updatePrefsViewDisplay();
 
@@ -485,8 +487,6 @@ class PreferencesViewController: NSViewController, NSComboBoxDelegate
 
         self.jsTraceLog.jsTraceLogMsg(clsName: self.sTraceCls, sTraceClsDisp:sCurrMethodDisp, sTraceClsMsg:"Invoked - 'sender' [\(String(describing: sender))]...");
 
-        // ToDo: implement the actual 'test' Connection...
-
         let bTestConnectionOk = CxDataRepo.sharedCxDataRepo.performInitialLoadProcessing(cxDataEndpoint: self.cxCurrentDataEndpoint!);
 
         if (bTestConnectionOk == false)
@@ -494,17 +494,21 @@ class PreferencesViewController: NSViewController, NSComboBoxDelegate
 
             self.nsBtnPrefsEndpointApply.isEnabled = false;
 
-            self.sPrefsViewDisplay = ">>> The 'current' Endpoint has been 'tested' successfully!";
+            self.sPrefsViewDisplay = ">>> ERROR: Connection to \(self.cxCurrentDataEndpoint!.sCxEndpointName!) failed!";
 
             self.updatePrefsViewDisplay();
+
+            return;
 
         }
 
         self.nsBtnPrefsEndpointApply.isEnabled = true;
 
-        self.sPrefsViewDisplay = ">>> The 'current' Endpoint has been 'tested' successfully!";
+        self.sPrefsViewDisplay = ">>> Connected to \(self.cxCurrentDataEndpoint!.sCxEndpointName!) successfully!";
 
         self.updatePrefsViewDisplay();
+
+        return;
         
     } // End of func buttonPreferencesEndpointTestConnectionPressed().
     

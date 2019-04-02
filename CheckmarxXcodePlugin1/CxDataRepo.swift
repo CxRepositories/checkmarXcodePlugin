@@ -590,7 +590,6 @@ public class CxDataRepo: NSObject
 
         nsMACxDataScans.write(toFile: sCurrFilespec, atomically: false);
 
-    //  self.jsTraceLog.jsTraceLogMsg(clsName: self.sTraceCls, sTraceClsDisp:sCurrMethodDisp, sTraceClsMsg:"'saved' Scan(s) array with (\(self.cxDataScans!.scans!.count)) element(s) of [\(self.cxDataScans!.scans!)] to the file [\(self.sCxDataScansFilespec)]...");
         self.jsTraceLog.jsTraceLogMsg(clsName: self.sTraceCls, sTraceClsDisp:sCurrMethodDisp, sTraceClsMsg:"'saved' Scan(s) array with (\(self.cxDataScans!.scans!.count)) element(s) of [\(nsMACxDataScans)] to the file [\(self.sCxDataScansFilespec)]...");
 
     } // End of func saveCxDataScans().
@@ -668,7 +667,6 @@ public class CxDataRepo: NSObject
 
         nsMACxDataBinds.write(toFile: sCurrFilespec, atomically: false);
 
-    //  self.jsTraceLog.jsTraceLogMsg(clsName: self.sTraceCls, sTraceClsDisp:sCurrMethodDisp, sTraceClsMsg:"'saved' bind(s) array with (\(self.cxDataBinds!.binds!.count)) element(s) of [\(self.cxDataBinds!.binds!)] to the file [\(self.sCxDataBindsFilespec)]...");
         self.jsTraceLog.jsTraceLogMsg(clsName: self.sTraceCls, sTraceClsDisp:sCurrMethodDisp, sTraceClsMsg:"'saved' bind(s) array with (\(self.cxDataBinds!.binds!.count)) element(s) of [\(nsMACxDataBinds)] to the file [\(self.sCxDataBindsFilespec)]...");
 
     } // End of func saveCxDataBinds().
@@ -889,9 +887,9 @@ public class CxDataRepo: NSObject
 
             self.restURLProcessor?.restURLData = RestURLData();
 
-            self.restURLProcessor?.restURLData?.cxDataEndpoint = self.cxActiveDataEndpoint;
-
         }
+
+        self.restURLProcessor?.restURLData?.cxDataEndpoint = self.cxActiveDataEndpoint;
 
         return self.performInitialLoadProcessingViaRestAPI();
 
@@ -926,7 +924,7 @@ public class CxDataRepo: NSObject
        
     } // End of func traceLastCxAPIOutput().
 
-    func performInitialLoadProcessingViaRestAPI() -> Bool
+    private func performInitialLoadProcessingViaRestAPI() -> Bool
     {
         
         let sCurrMethod:String = #function;
@@ -946,14 +944,14 @@ public class CxDataRepo: NSObject
 
                 self.jsTraceLog.jsTraceLogMsg(clsName: self.sTraceCls, sTraceClsDisp:sCurrMethodDisp, sTraceClsMsg:sLoadProcessorStatusMsg);
 
-                self.cxActiveDataEndpoint = nil;
-
                 DispatchQueue.main.async
                 {
 
                     _ = AppDelegate.ClassSingleton.cxAppDelegate!.updateAppStatusView(sAppStatusView: sLoadProcessorStatusMsg);
 
                 }   
+
+                self.cxActiveDataEndpoint = nil;
 
                 return false;
 
@@ -1040,9 +1038,6 @@ public class CxDataRepo: NSObject
         {
 
             self.jsTraceLog.jsTraceLogMsg(clsName: self.sTraceCls, sTraceClsDisp:sCurrMethodDisp, sTraceClsMsg:"The JSON Request 'postJsonRequest' [\(postJsonRequest)] failed - 'restURLResponse' was [\(self.restURLResponse!)] - Error!");
-
-        //  self.sRestURLAccessToken = "";
-            self.cxActiveDataEndpoint = nil;
 
             return false;
 

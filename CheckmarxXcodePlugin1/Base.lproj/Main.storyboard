@@ -651,13 +651,13 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="eu3-7i-yIM"/>
-                                        <menuItem title="Advanced Binds" keyEquivalent="a" id="jjW-7g-G3U">
+                                        <menuItem title="Checkmarx Advanced Binds" keyEquivalent="a" id="jjW-7g-G3U">
                                             <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                             <connections>
                                                 <segue destination="Kx3-kW-hDz" kind="show" id="jpR-Ux-MiQ"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Log History" keyEquivalent="l" id="kjp-Ef-iV0" userLabel="Log History">
+                                        <menuItem title="Checkmarx Scan Log History" keyEquivalent="l" id="kjp-Ef-iV0" userLabel="Log History">
                                             <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                             <connections>
                                                 <segue destination="85W-x0-uKJ" kind="show" id="vD7-ZO-Hta"/>
@@ -697,7 +697,7 @@
             </objects>
             <point key="canvasLocation" x="-592" y="-140"/>
         </scene>
-        <!--Window Controller-->
+        <!--Checkmarx Scan Log Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController storyboardIdentifier="MainViewWindowController" showSeguePresentationStyle="single" id="B8D-0N-5wS" sceneMemberID="viewController">
@@ -718,15 +718,15 @@
             </objects>
             <point key="canvasLocation" x="-836" y="194"/>
         </scene>
-        <!--Main View-->
+        <!--Checkmarx Scan Log-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController title="Main View" storyboardIdentifier="MainViewController" showSeguePresentationStyle="single" id="XfG-lQ-9wD" customClass="MainViewController" customModule="CheckmarxXcodePlugin1" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Checkmarx Scan Log" storyboardIdentifier="MainViewController" showSeguePresentationStyle="single" id="XfG-lQ-9wD" customClass="MainViewController" customModule="CheckmarxXcodePlugin1" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl" userLabel="MainView">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="314"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0rS-N8-S8R" userLabel="Main View">
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0rS-N8-S8R" userLabel="Checkmarx Scan Log">
                                 <rect key="frame" x="68" y="272" width="392" height="22"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="Xho-S9-BRT">
@@ -826,11 +826,11 @@
             </objects>
             <point key="canvasLocation" x="-836" y="642"/>
         </scene>
-        <!--Window Controller-->
+        <!--Checkmarx Log History Window Controller-->
         <scene sceneID="nwd-cS-p8D">
             <objects>
                 <windowController showSeguePresentationStyle="single" id="85W-x0-uKJ" sceneMemberID="viewController">
-                    <window key="window" title="Log History" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="hsX-j7-Dfx">
+                    <window key="window" title="Checkmarx Log History" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="hsX-j7-Dfx">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="320" y="343" width="480" height="270"/>
@@ -847,10 +847,10 @@
             </objects>
             <point key="canvasLocation" x="-244" y="291"/>
         </scene>
-        <!--Log History View Controller-->
+        <!--Checkmarx Log History-->
         <scene sceneID="KZt-NW-mYb">
             <objects>
-                <viewController showSeguePresentationStyle="single" id="zOq-zf-r62" customClass="LogHistoryViewController" customModule="CheckmarxXcodePlugin1" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Checkmarx Log History" showSeguePresentationStyle="single" id="zOq-zf-r62" customClass="LogHistoryViewController" customModule="CheckmarxXcodePlugin1" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="4ps-un-U4F" userLabel="LogHistoryView">
                         <rect key="frame" x="0.0" y="0.0" width="543" height="565"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -997,11 +997,11 @@
             </objects>
             <point key="canvasLocation" x="-244" y="883"/>
         </scene>
-        <!--Window Controller-->
+        <!--Checkmarx Preferences Window Controller-->
         <scene sceneID="nq3-Ia-wo6">
             <objects>
                 <windowController showSeguePresentationStyle="single" id="KyB-6N-SYj" sceneMemberID="viewController">
-                    <window key="window" title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="ni3-yr-lWX">
+                    <window key="window" title="Checkmarx Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="ni3-yr-lWX">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="320" y="343" width="663" height="340"/>
@@ -1018,18 +1018,18 @@
             </objects>
             <point key="canvasLocation" x="391" y="152"/>
         </scene>
-        <!--Preferences View Controller-->
+        <!--Checkmarx Preferences-->
         <scene sceneID="elK-vL-G9H">
             <objects>
-                <viewController title="Preferences View Controller" showSeguePresentationStyle="single" id="9VV-iB-K8d" customClass="PreferencesViewController" customModule="CheckmarxXcodePlugin1" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="TFO-Ck-j4z" userLabel="Preferences View">
+                <viewController title="Checkmarx Preferences" showSeguePresentationStyle="single" id="9VV-iB-K8d" customClass="PreferencesViewController" customModule="CheckmarxXcodePlugin1" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="TFO-Ck-j4z" userLabel="Checkmarx Preferences View">
                         <rect key="frame" x="0.0" y="0.0" width="663" height="331"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8zv-Lo-B45" userLabel="Prefs Endpoint Name Label">
                                 <rect key="frame" x="259" y="291" width="106" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="Endpoint Name:" id="7Ny-BU-4mQ">
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="CxServer Name:" id="7Ny-BU-4mQ">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1047,7 +1047,7 @@
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JaK-xI-G6y" userLabel="Prefs Endpoint Active Label">
                                 <rect key="frame" x="259" y="259" width="106" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="Endpoint Active?" id="fnH-xp-696">
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Default Server?" id="fnH-xp-696">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1142,7 +1142,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fus-oJ-1ne" userLabel="Prefs Password Display">
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fus-oJ-1ne" userLabel="Prefs Password Display" customClass="NSSecureTextField">
                                 <rect key="frame" x="371" y="97" width="272" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="p1U-F3-2hY">
@@ -1320,11 +1320,11 @@ Gw
             </objects>
             <point key="canvasLocation" x="390.5" y="738.5"/>
         </scene>
-        <!--Window Controller-->
+        <!--Checkmarx Advanced Binds Window Controller-->
         <scene sceneID="JMj-xW-Bie">
             <objects>
                 <windowController storyboardIdentifier="AdvancedBindViewWindow" showSeguePresentationStyle="single" id="Kx3-kW-hDz" sceneMemberID="viewController">
-                    <window key="window" title="Advanced Binds..." allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="vF6-Lb-Rs3">
+                    <window key="window" title="Checkmarx Advanced Binds..." allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="vF6-Lb-Rs3">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="222" y="343" width="677" height="270"/>
@@ -1341,10 +1341,10 @@ Gw
             </objects>
             <point key="canvasLocation" x="1149" y="95"/>
         </scene>
-        <!--Advanced Binds View Controller-->
+        <!--Checkmarx Advanced Binds-->
         <scene sceneID="b8c-wd-c6d">
             <objects>
-                <viewController title="Advanced Binds View Controller" storyboardIdentifier="BindViewController" showSeguePresentationStyle="single" id="2bZ-iZ-KIK" customClass="BindViewController" customModule="CheckmarxXcodePlugin1" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Checkmarx Advanced Binds" storyboardIdentifier="BindViewController" showSeguePresentationStyle="single" id="2bZ-iZ-KIK" customClass="BindViewController" customModule="CheckmarxXcodePlugin1" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="Q9O-BM-HqP" userLabel="Advanced Binds View">
                         <rect key="frame" x="0.0" y="0.0" width="663" height="317"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1379,7 +1379,7 @@ Gw
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IC4-C2-7fM" userLabel="Bind Endpoint Label">
                                 <rect key="frame" x="260" y="194" width="125" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="Bind Endpoint:" id="nnd-a0-8kw">
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Bind CxServer Name:" id="nnd-a0-8kw">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1603,11 +1603,11 @@ Gw
             </objects>
             <point key="canvasLocation" x="1149" y="565"/>
         </scene>
-        <!--Window Controller-->
+        <!--Checkmarx Bind and Report Window Controller-->
         <scene sceneID="DLX-gd-tnZ">
             <objects>
                 <windowController storyboardIdentifier="BindReportViewWindow" showSeguePresentationStyle="single" id="0oe-u6-EvZ" sceneMemberID="viewController">
-                    <window key="window" title="Bind and Report" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="nkg-5r-12X" userLabel="Bind-Report">
+                    <window key="window" title="Checkmarx Bind and Report" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="nkg-5r-12X" userLabel="Bind-Report">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="320" y="343" width="480" height="208"/>
@@ -1624,10 +1624,10 @@ Gw
             </objects>
             <point key="canvasLocation" x="-1527" y="205"/>
         </scene>
-        <!--Bind and Report View Controller-->
+        <!--Checkmarx Bind and Report-->
         <scene sceneID="pOX-I6-jRC">
             <objects>
-                <viewController title="Bind and Report View Controller" storyboardIdentifier="BindReportViewController" showSeguePresentationStyle="single" id="fhd-YJ-GKD" customClass="BindReportViewController" customModule="CheckmarxXcodePlugin1" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Checkmarx Bind and Report" storyboardIdentifier="BindReportViewController" showSeguePresentationStyle="single" id="fhd-YJ-GKD" customClass="BindReportViewController" customModule="CheckmarxXcodePlugin1" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="QlI-NW-No3" userLabel="Bind-Report View">
                         <rect key="frame" x="0.0" y="0.0" width="473" height="199"/>
                         <autoresizingMask key="autoresizingMask"/>
