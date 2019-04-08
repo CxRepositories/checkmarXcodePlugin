@@ -32,8 +32,18 @@
 <li>From the "/Applications" directory launch the App. Once it is up, close the App (this action tells the system that there is an Xcode Source Editor extension contained within the App). If you get a system popup saying that the App requires your permission to control Xcode, allow the action. This is used to locate the current Xcode project file.</li>
 <li>Go to "System Preferences" and then to "Extensions". Scroll down (if needed) on the left-hand side and select "Xcode Source Editor". The Checkmarx Xcode App extension "CxViewer" should show on the right-hand side. Click on the box to enable the plugin.</li>
 <li>Launch Xcode, view a source file, and then look for the "CxViewer" sub-menu on the Xcode "Editor" menu.</li>
-<li>Select one of the "CxViewer" sub-menu items: Full Scan, Incremental Scan, Binding Settings, and View Last Report.</li>
-<li>Report types may be: pdf, xml, csv, or rtf.</li>
+<li>Select one of the "CxViewer" sub-menu items: Full Scan, Incremental Scan, Binding Settings, View Last Report, or View Results in CxSast.</li>
+<li>Report types may be: pdf, xml, csv, or rtf. No Report type is needed for "View Results in CxSast".</li>
+</ul>
+<br>
+<h2><b><i><u>--- Steps to setup (1st Scan) ---</u></i></b></h2>
+<ul>
+<li>From the "/Applications" directory launch the App. Once it is up, goto the "CheckmarxXcodePlugin1" menu and select "Preferences" (or Command-,).</li>
+<li>On the "Preferences" screen, click on the "+" button, set a name of the new Endpoint and click "Create". On the right-hand side of the screen set the various fields (if this is the only Endpoint - make sure to mark it the 'Default Server').</li>
+<li>Press "Test Connection...". If the Connection is good, the "Apply" button will enable. If enabled, click it and dismiss the window. If NOT enabled, check the fields and re-try.</li>
+<li>Once the "Default Server" Endpoint has been set, you can use all of the "CxViewer" menu items in Xcode.</li>
+<li>On the 1st scan, the CheckmarxXcodePlugin1 will pop-up a window asking for "Checkmarx Bind and Report" settings. Drop-down the "CxSAST Project" and select the CxServer Project name to associate with the scan. Then select whether or not to 'Download a Report' and (if so) drop-down and select the "Report Type". Click on "Apply" and dismiss the window.</li>
+<li>If you need to make changes to a "Bound" Project's report settings, click on the "CxViewer" "Binding Settings" menu item.</li>
 </ul>
 </body>
 

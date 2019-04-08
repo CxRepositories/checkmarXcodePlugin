@@ -19,7 +19,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.04</string>
 	<key>CFBundleVersion</key>
-	<string>02_02</string>
+	<string>03_02</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>$(MACOSX_DEPLOYMENT_TARGET)</string>
 	<key>NSExtension</key>
@@ -59,6 +59,14 @@
 					<string>$(PRODUCT_BUNDLE_IDENTIFIER).SourceEditorCommand4</string>
 					<key>XCSourceEditorCommandName</key>
 					<string>View Last Report</string>
+				</dict>
+				<dict>
+					<key>XCSourceEditorCommandClassName</key>
+					<string>$(PRODUCT_MODULE_NAME).SourceEditorCommand</string>
+					<key>XCSourceEditorCommandIdentifier</key>
+					<string>$(PRODUCT_BUNDLE_IDENTIFIER).SourceEditorCommand5</string>
+					<key>XCSourceEditorCommandName</key>
+					<string>View Results in CxSast</string>
 				</dict>
 			</array>
 			<key>XCSourceEditorExtensionPrincipalClass</key>

@@ -15,7 +15,7 @@ class CxDataBinds: NSObject
     {
         
         static let sClsId          = "CxDataBinds";
-        static let sClsVers        = "v1.0402";
+        static let sClsVers        = "v1.0403";
         static let sClsDisp        = sClsId+".("+sClsVers+"): ";
         static let sClsCopyRight   = "Copyright (C) Checkmarx 2018-2019. All Rights Reserved.";
         static let bClsTrace       = true;
@@ -342,7 +342,7 @@ class CxDataBinds: NSObject
 
         // Note: All we care about here, is if we already know a filespec, then does it exist.
 
-        if (self.sBindXcodeWSDocFilespec!.count > 1)
+        if (self.sBindXcodeWSDocFilespec!.count > 0)
         {
 
             if (JsFileIO.fileExists(sFilespec: self.sBindXcodeWSDocFilespec!) == false)

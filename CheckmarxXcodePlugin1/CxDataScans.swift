@@ -15,7 +15,7 @@ class CxDataScans: NSObject
     {
         
         static let sClsId          = "CxDataScans";
-        static let sClsVers        = "v1.0402";
+        static let sClsVers        = "v1.0403";
         static let sClsDisp        = sClsId+".("+sClsVers+"): ";
         static let sClsCopyRight   = "Copyright (C) Checkmarx 2018-2019. All Rights Reserved.";
         static let bClsTrace       = true;
@@ -156,6 +156,32 @@ class CxDataScans: NSObject
         return bScanExists;
 
     } // End of func scanExists().
+
+    func locateLastScanForXcodeWSDoc(sXcodeWSDocFilespec: String) -> Scan?
+    {
+
+        let sCurrMethod:String = #function;
+        let sCurrMethodDisp    = "'"+sCurrMethod+"()'";
+
+        self.jsTraceLog.jsTraceLogMsg(clsName: self.sTraceCls, sTraceClsDisp:sCurrMethodDisp, sTraceClsMsg:"Invoked - 'self' is [\(self)] - 'sXcodeWSDocFilespec' [\(sXcodeWSDocFilespec)]...");
+
+        var lastScan:Scan? = nil;
+
+        for cxDataScan in self.scans!
+        {
+
+            if (cxDataScan.sAppXcodeWSDocFilespec == sXcodeWSDocFilespec)
+            {
+
+                lastScan = cxDataScan;
+
+            }
+
+        }
+
+        return lastScan;
+
+    } // End of func locateLastScanForXcodeWSDoc().
 
 } // End of class CxDataScans.
 

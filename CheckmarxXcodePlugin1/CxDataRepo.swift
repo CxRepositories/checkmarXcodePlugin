@@ -17,7 +17,7 @@ public class CxDataRepo: NSObject
     {
         
         static let sClsId          = "CxDataRepo";
-        static let sClsVers        = "v1.0402";
+        static let sClsVers        = "v1.0403";
         static let sClsDisp        = sClsId+".("+sClsVers+"): ";
         static let sClsCopyRight   = "Copyright (C) Checkmarx 2018-2019. All Rights Reserved.";
         static let bClsTrace       = true;
@@ -326,7 +326,7 @@ public class CxDataRepo: NSObject
 
         let aPlistSavedEndpoints = sCxDataEndpointsPlist?.propertyList() as! [[String:AnyObject]];
         
-        if (aPlistSavedEndpoints.count > 1)
+        if (aPlistSavedEndpoints.count > 0)
         {
 
             for entry in aPlistSavedEndpoints
@@ -367,7 +367,7 @@ public class CxDataRepo: NSObject
         var aSavedScans:[Scan] = [];
         let aPlistSavedScans   = sCxDataScansPlist?.propertyList() as! [[String:AnyObject]];
         
-        if (aPlistSavedScans.count > 1)
+        if (aPlistSavedScans.count > 0)
         {
 
             for entry in aPlistSavedScans
@@ -412,7 +412,7 @@ public class CxDataRepo: NSObject
         var aSavedBinds:[Bind] = [];
         let aPlistSavedBinds   = sCxDataBindsPlist?.propertyList() as! [[String:AnyObject]];
         
-        if (aPlistSavedBinds.count > 1)
+        if (aPlistSavedBinds.count > 0)
         {
 
             for entry in aPlistSavedBinds
@@ -460,13 +460,13 @@ public class CxDataRepo: NSObject
             let cxDataEndpoint:CxDataEndpoint          = dictEntry.value;
             let nsMDCxDataEndpoint:NSMutableDictionary = [:];
 
-            nsMDCxDataEndpoint["Name"]     = cxDataEndpoint.sCxEndpointName;
+            nsMDCxDataEndpoint["Name"]     = cxDataEndpoint.sCxEndpointName ?? "";
             nsMDCxDataEndpoint["Active"]   = (cxDataEndpoint.bCxEndpointActive == true) ? "true" : "false";
-            nsMDCxDataEndpoint["Protocol"] = cxDataEndpoint.sHttpProtocol;    
-            nsMDCxDataEndpoint["Host"]     = cxDataEndpoint.sHttpHost;        
-            nsMDCxDataEndpoint["Port"]     = cxDataEndpoint.sHttpPort;        
-            nsMDCxDataEndpoint["Username"] = cxDataEndpoint.sUsername;        
-            nsMDCxDataEndpoint["Password"] = cxDataEndpoint.sPassword;        
+            nsMDCxDataEndpoint["Protocol"] = cxDataEndpoint.sHttpProtocol ?? "http";    
+            nsMDCxDataEndpoint["Host"]     = cxDataEndpoint.sHttpHost ?? "";        
+            nsMDCxDataEndpoint["Port"]     = cxDataEndpoint.sHttpPort ?? "";        
+            nsMDCxDataEndpoint["Username"] = cxDataEndpoint.sUsername ?? "";        
+            nsMDCxDataEndpoint["Password"] = cxDataEndpoint.sPassword ?? "";        
 
             nsMACxDataEndpoints.add(nsMDCxDataEndpoint);
  
@@ -875,6 +875,15 @@ public class CxDataRepo: NSObject
 
         self.cxActiveDataEndpoint = cxDataEndpoint;
 
+        if (self.cxActiveDataEndpoint == nil)
+        {
+
+            self.jsTraceLog.jsTraceLogMsg(clsName: self.sTraceCls, sTraceClsDisp:sCurrMethodDisp, sTraceClsMsg:"The 'active' CxDataEndpoint 'self.cxActiveDataEndpoint' is 'nil' - Error!");
+
+            return false;
+
+        }
+
         if (self.restURLProcessor == nil)
         {
 
@@ -893,7 +902,7 @@ public class CxDataRepo: NSObject
 
         return self.performInitialLoadProcessingViaRestAPI();
 
-    } // End of func loadInitialDataForActiveCxDataEndpoint();
+    } // End of func performInitialLoadProcessing();
 
     private func traceLastCxAPIOutput(adJsonAPIRespResult:[NSDictionary]? = nil, sJsonAPIName:String = "") -> Bool
     {

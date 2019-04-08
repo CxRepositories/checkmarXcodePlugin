@@ -15,7 +15,7 @@ class PreferencesViewController: NSViewController, NSComboBoxDelegate
     {
         
         static let sClsId          = "PreferencesViewController";
-        static let sClsVers        = "v1.0402";
+        static let sClsVers        = "v1.0403";
         static let sClsDisp        = sClsId+".("+sClsVers+"): ";
         static let sClsCopyRight   = "Copyright (C) Checkmarx 2018-2019. All Rights Reserved.";
         static let bClsTrace       = true;
@@ -241,10 +241,10 @@ class PreferencesViewController: NSViewController, NSComboBoxDelegate
         self.nsCBPrefsProtocolDisplay.numberOfVisibleItems  = 2;
         self.nsCBPrefsProtocolDisplay.completes             = false;
 
-        self.indexCxDataEndpointActive = 0;
+        self.indexCxDataEndpointActive = -1;
         self.sCurrentPrefsEndpointKey  = "";
 
-        if (CxDataRepo.sharedCxDataRepo.dictCxDataEndpoints.count > 1)
+        if (CxDataRepo.sharedCxDataRepo.dictCxDataEndpoints.count > 0)
         {
 
             for (i, dictEntry) in CxDataRepo.sharedCxDataRepo.dictCxDataEndpoints.enumerated()
@@ -257,22 +257,22 @@ class PreferencesViewController: NSViewController, NSComboBoxDelegate
                 if (i == 0)
                 {
 
-                    self.nsTFPrefsEndpointsDisplay.stringValue = cxDataEndpoint.sCxEndpointName!;
+                    self.nsTFPrefsEndpointsDisplay.stringValue = cxDataEndpoint.sCxEndpointName ?? "";
                     self.nsChkBPrefsEndpointActive.state       = (cxDataEndpoint.bCxEndpointActive == true) ? NSControl.StateValue.on : NSControl.StateValue.off;
-                    self.nsTFPrefsHostDisplay.stringValue      = cxDataEndpoint.sHttpHost!;
-                    self.nsTFPrefsPortDisplay.stringValue      = cxDataEndpoint.sHttpPort!;
-                    self.nsTFPrefsUsernameDisplay.stringValue  = cxDataEndpoint.sUsername!;
-                    self.nsTFPrefsPasswordDisplay.stringValue  = cxDataEndpoint.sPassword!;
+                    self.nsTFPrefsHostDisplay.stringValue      = cxDataEndpoint.sHttpHost ?? "";
+                    self.nsTFPrefsPortDisplay.stringValue      = cxDataEndpoint.sHttpPort ?? "";
+                    self.nsTFPrefsUsernameDisplay.stringValue  = cxDataEndpoint.sUsername ?? "";
+                    self.nsTFPrefsPasswordDisplay.stringValue  = cxDataEndpoint.sPassword ?? "";
 
                     self.cxCurrentDataEndpoint    = cxDataEndpoint;
-                    self.sCurrentPrefsEndpointKey = cxDataEndpoint.sCxEndpointName!;
+                    self.sCurrentPrefsEndpointKey = cxDataEndpoint.sCxEndpointName ?? "";
 
                 }
 
                 if (cxDataEndpoint.bCxEndpointActive == true)
                 {
 
-                    self.nsTFPrefsEndpointsDisplay.stringValue = cxDataEndpoint.sCxEndpointName!;
+                    self.nsTFPrefsEndpointsDisplay.stringValue = cxDataEndpoint.sCxEndpointName ?? "";
                     self.nsChkBPrefsEndpointActive.state       = NSControl.StateValue.on;
 
                     _ = CxDataRepo.sharedCxDataRepo.resetAllCxDataEndpointsToInactive(sActiveEndpointKey: cxDataEndpoint.sCxEndpointName!);
@@ -284,26 +284,27 @@ class PreferencesViewController: NSViewController, NSComboBoxDelegate
 
                     }
 
-                    self.nsTFPrefsHostDisplay.stringValue     = cxDataEndpoint.sHttpHost!;
-                    self.nsTFPrefsPortDisplay.stringValue     = cxDataEndpoint.sHttpPort!;
-                    self.nsTFPrefsUsernameDisplay.stringValue = cxDataEndpoint.sUsername!;
-                    self.nsTFPrefsPasswordDisplay.stringValue = cxDataEndpoint.sPassword!;
+                    self.nsTFPrefsHostDisplay.stringValue     = cxDataEndpoint.sHttpHost ?? "";
+                    self.nsTFPrefsPortDisplay.stringValue     = cxDataEndpoint.sHttpPort ?? "";
+                    self.nsTFPrefsUsernameDisplay.stringValue = cxDataEndpoint.sUsername ?? "";
+                    self.nsTFPrefsPasswordDisplay.stringValue = cxDataEndpoint.sPassword ?? "";
 
                     self.cxCurrentDataEndpoint     = cxDataEndpoint;
-                    self.sCurrentPrefsEndpointKey  = cxDataEndpoint.sCxEndpointName!;
+                    self.sCurrentPrefsEndpointKey  = cxDataEndpoint.sCxEndpointName ?? "";
                     self.indexCxDataEndpointActive = i;
 
                 }
 
             }
 
-            self.nsOVPrefsEndpointsList.reloadData();
-
-            self.nsOVPrefsEndpointsList.needsDisplay = true;
-
-            self.nsOVPrefsEndpointsList.display();
-
         }
+
+        self.nsOVPrefsEndpointsList.reloadData();
+
+        self.nsOVPrefsEndpointsList.needsDisplay = true;
+
+        self.nsOVPrefsEndpointsList.display();
+
 
     } // End of func loadPreferencesViewForAllItems().
     
@@ -323,7 +324,7 @@ class PreferencesViewController: NSViewController, NSComboBoxDelegate
         if (cxDataEndpoint != nil)
         {
 
-            self.nsTFPrefsEndpointsDisplay.stringValue = cxDataEndpoint!.sCxEndpointName!;
+            self.nsTFPrefsEndpointsDisplay.stringValue = cxDataEndpoint!.sCxEndpointName ?? "";
             self.nsChkBPrefsEndpointActive.state       = (cxDataEndpoint!.bCxEndpointActive == true) ? NSControl.StateValue.on : NSControl.StateValue.off;
 
             if (cxDataEndpoint!.bCxEndpointActive == true)
@@ -346,15 +347,15 @@ class PreferencesViewController: NSViewController, NSComboBoxDelegate
 
             }
 
-            self.nsTFPrefsHostDisplay.stringValue     = cxDataEndpoint!.sHttpHost!;
-            self.nsTFPrefsPortDisplay.stringValue     = cxDataEndpoint!.sHttpPort!;
-            self.nsTFPrefsUsernameDisplay.stringValue = cxDataEndpoint!.sUsername!;
-            self.nsTFPrefsPasswordDisplay.stringValue = cxDataEndpoint!.sPassword!;
+            self.nsTFPrefsHostDisplay.stringValue     = cxDataEndpoint!.sHttpHost ?? "";
+            self.nsTFPrefsPortDisplay.stringValue     = cxDataEndpoint!.sHttpPort ?? "";
+            self.nsTFPrefsUsernameDisplay.stringValue = cxDataEndpoint!.sUsername ?? "";
+            self.nsTFPrefsPasswordDisplay.stringValue = cxDataEndpoint!.sPassword ?? "";
 
             let atIndex:Int = self.asCxDataEndpointNames.firstIndex(of: cxDataEndpoint!.sCxEndpointName!)!;
 
             self.cxCurrentDataEndpoint     = cxDataEndpoint!;
-            self.sCurrentPrefsEndpointKey  = cxDataEndpoint!.sCxEndpointName!;
+            self.sCurrentPrefsEndpointKey  = cxDataEndpoint!.sCxEndpointName ?? "";
             self.indexCxDataEndpointActive = atIndex;
 
             self.nsBtnPrefsEndpointApply.isEnabled   = false;
@@ -486,6 +487,23 @@ class PreferencesViewController: NSViewController, NSComboBoxDelegate
         let sCurrMethodDisp    = "'"+sCurrMethod+"()'";
 
         self.jsTraceLog.jsTraceLogMsg(clsName: self.sTraceCls, sTraceClsDisp:sCurrMethodDisp, sTraceClsMsg:"Invoked - 'sender' [\(String(describing: sender))]...");
+
+        self.sPrefsViewDisplay = ""; 
+
+        self.updateCxDataEndpointFromPreferencesView(cxDataEndpoint: self.cxCurrentDataEndpoint);
+
+        if (self.cxCurrentDataEndpoint!.bCxEndpointActive == true)
+        {
+
+            _ = CxDataRepo.sharedCxDataRepo.resetAllCxDataEndpointsToInactive(sActiveEndpointKey: self.cxCurrentDataEndpoint!.sCxEndpointName!);
+
+        }
+
+        self.jsTraceLog.jsTraceLogMsg(clsName: self.sTraceCls, sTraceClsDisp:sCurrMethodDisp, sTraceClsMsg:"For the CxDataEndpoint named [\(String(describing: self.cxCurrentDataEndpoint!.sCxEndpointName))] updated from the 'prefs' view 'body'...");
+
+        self.sPrefsViewDisplay = ">>> Change(s) to the CxServer URL have been applied!";
+
+        self.updatePrefsViewDisplay();
 
         let bTestConnectionOk = CxDataRepo.sharedCxDataRepo.performInitialLoadProcessing(cxDataEndpoint: self.cxCurrentDataEndpoint!);
 
@@ -726,6 +744,13 @@ extension PreferencesViewController: NSOutlineViewDataSource
         let sCurrMethodDisp    = "'"+sCurrMethod+"()'";
 
         self.jsTraceLog.jsTraceLogMsg(clsName: self.sTraceCls, sTraceClsDisp:sCurrMethodDisp, sTraceClsMsg:"Invoked - 'outlineView' [\(String(describing: outlineView))] - 'index' [\(String(describing: index))] - 'item' [\(String(describing: item))]...");
+
+        if (self.asCxDataEndpointNames.count < 1)
+        {
+
+            return "";
+
+        }
 
         let sCxDataEndpointName = self.asCxDataEndpointNames[index];
 

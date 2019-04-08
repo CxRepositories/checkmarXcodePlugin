@@ -19,7 +19,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.04</string>
 	<key>CFBundleVersion</key>
-	<string>02_10</string>
+	<string>03_16</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.developer-tools</string>
 	<key>LSMinimumSystemVersion</key>

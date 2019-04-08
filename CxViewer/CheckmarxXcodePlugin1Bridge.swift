@@ -1,5 +1,5 @@
 //
-//  CheckmarxXcodePlugin1Bridge.swift - v1.0402
+//  CheckmarxXcodePlugin1Bridge.swift - v1.0403
 //  Swift-AppleScriptObjC
 //
 
@@ -24,6 +24,8 @@ import Cocoa
     func submitScanAsIncremental(idXcodeScan:NSNumber);
 
     func signalBindViewLastReport();
+
+    func signalBindViewResultsInCxSAST();
 
     func signalBindOrUnbind();
 

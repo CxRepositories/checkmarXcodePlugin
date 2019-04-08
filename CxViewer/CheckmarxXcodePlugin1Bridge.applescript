@@ -1,5 +1,5 @@
 
--- CheckmarxXcodePlugin1Bridge - v1.0402
+-- CheckmarxXcodePlugin1Bridge - v1.0403
 
 script CheckmarxXcodePlugin1Bridge
 	
@@ -125,6 +125,23 @@ script CheckmarxXcodePlugin1Bridge
 		end tell
 		
 	end signalBindViewLastReport
+	
+	on signalBindViewResultsInCxSAST() -- ()
+		
+		tell application "CheckmarxXcodePlugin1"
+			
+			activate
+			
+			set newBind to make new bind
+			
+			tagOrigin newBind as "CxBindSourceIsXcode"
+			
+			--  viewLastSASTScanReport newBind
+			viewResultsInCxSAST newBind
+			
+		end tell
+		
+	end signalBindViewResultsInCxSAST
 	
 	on signalBindOrUnbind() -- () 
 		

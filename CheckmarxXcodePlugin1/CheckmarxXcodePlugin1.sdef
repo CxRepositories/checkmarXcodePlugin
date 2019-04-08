@@ -155,6 +155,10 @@
       <direct-parameter description="One bind" type="bind"/>
     </command>
 
+    <command name="viewResultsInCxSAST" code="CxXpVrCx">
+      <direct-parameter description="One bind" type="bind"/>
+    </command>
+
     <command name="handleBindOrUnbind" code="CxXpBdUd">
       <direct-parameter description="One bind" type="bind"/>
     </command>
@@ -258,6 +262,10 @@
       
       <responds-to command="viewLastSASTScanReport">
         <cocoa method="viewBindLastSASTScanReport:"/>
+      </responds-to>
+      
+      <responds-to command="viewResultsInCxSAST">
+        <cocoa method="viewResultsInCxSAST:"/>
       </responds-to>
       
       <responds-to command="handleBindOrUnbind">

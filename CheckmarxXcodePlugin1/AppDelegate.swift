@@ -9,13 +9,14 @@
 import Cocoa
 
 @NSApplicationMain class AppDelegate: NSObject, NSApplicationDelegate
+
 {
 
     struct ClassInfo
     {
         
         static let sClsId          = "AppDelegate";
-        static let sClsVers        = "v1.0402";
+        static let sClsVers        = "v1.0403";
         static let sClsDisp        = sClsId+".("+sClsVers+"): ";
         static let sClsCopyRight   = "Copyright (C) Checkmarx 2018-2019. All Rights Reserved.";
         static let bClsTrace       = true;
@@ -396,13 +397,13 @@ import Cocoa
 
     } // End of func invokeScanSubmitViaAPICall().
 
-    open func invokeBindOrUnbindViaAPICall(bind: Bind, bCallIsForReportView:Bool) -> Bool
+    open func invokeBindOrUnbindViaAPICall(bind: Bind, bCallIsForReportView:Bool, bViewInCxSAST:Bool) -> Bool
     {
 
         let sCurrMethod:String = #function;
         let sCurrMethodDisp    = "'"+sCurrMethod+"()'";
 
-        self.jsTraceLog.jsTraceLogMsg(clsName: self.sTraceCls, sTraceClsDisp:sCurrMethodDisp, sTraceClsMsg:"Invoked - 'bind' is [\(bind)] - 'bCallIsForView' [\(bCallIsForReportView)]...");
+        self.jsTraceLog.jsTraceLogMsg(clsName: self.sTraceCls, sTraceClsDisp:sCurrMethodDisp, sTraceClsMsg:"Invoked - 'bind' is [\(bind)] - 'bCallIsForView' [\(bCallIsForReportView)] - 'bViewInCxSAST' [\(bViewInCxSAST)]...");
 
         cTestApi += 1;
 
@@ -435,7 +436,6 @@ import Cocoa
                     self.updateAppStatusView(sAppStatusView: sCurrentBindStatusMsg);
                     self.updateAppDelegateDisplay();
 
-                //  _ = self.cxDataRepo.cxDataBinds!.deleteBind(bind: currBind);
                     _ = self.removeObjectFromBinds(bind: currBind);
 
 
@@ -545,8 +545,18 @@ import Cocoa
                 {
 
                     MainViewController.ClassSingleton.cxAppMainViewController!.sMainViewLastReportFilespec = currBind.cxLastSASTScanReportFilespec;
+                    MainViewController.ClassSingleton.cxAppMainViewController!.mvMainLastScan              = nil;
 
-                    MainViewController.ClassSingleton.cxAppMainViewController!.handleMainViewLastReport();
+                    let currScan:Scan? = self.cxDataRepo.cxDataScans!.locateLastScanForXcodeWSDoc(sXcodeWSDocFilespec: currBind.key);
+
+                    if (currScan != nil)
+                    {
+
+                        MainViewController.ClassSingleton.cxAppMainViewController!.mvMainLastScan = currScan!;
+
+                    }
+
+                    MainViewController.ClassSingleton.cxAppMainViewController!.handleMainViewLastReport(bViewInCxSAST: bViewInCxSAST);
 
                 }
 
@@ -643,7 +653,7 @@ import Cocoa
         if (MainViewController.ClassSingleton.cxAppMainViewController != nil)
         {
 
-            MainViewController.ClassSingleton.cxAppMainViewController!.updateMainViewDisplay();
+            MainViewController.ClassSingleton.cxAppMainViewController!.updateMainViewDisplay(sMainViewDisplay: nil);
 
         }
 

@@ -53,7 +53,7 @@ import Cocoa
         didSet { postNotificationOfChanges() }
     }
 
-    // Variables that are NOT used in scripting (nor are saved to the plist):
+    // Variables that are NOT used in scripting (nor are saved (directly) to the plist but might be in the attrs):
 
     var sAppXcodeWSDocFilespec:String         = "";
     var sAppUploadZipFilespec:String          = "";
@@ -214,13 +214,50 @@ import Cocoa
                     let attrFields = attr.components(separatedBy: ":");
                     let newAttr    = Attr(name: attrFields[0], value: attrFields[1]);
 
-                    if (newAttr.name == "CxXcodeWSDocFilespec")
+                //  if (newAttr.name == "CxXcodeWSDocFilespec")
+                //  {
+                //
+                //      self.sAppXcodeWSDocFilespec = newAttr.value;
+                //
+                //      self.jsTraceLog.jsTraceLogMsg(clsName: self.sTraceCls, sTraceClsDisp:"init?()", sTraceClsMsg:"'newAttr' [\(newAttr.toString())] exists in the 'attrs' of the loading 'Scan'...");
+                //
+                //  }
+
+                    switch (newAttr.name)
                     {
 
-                        self.sAppXcodeWSDocFilespec = newAttr.value;
+                        case "CxXcodeWSDocFilespec":
 
-                        self.jsTraceLog.jsTraceLogMsg(clsName: self.sTraceCls, sTraceClsDisp:"init?()", sTraceClsMsg:"'newAttr' [\(newAttr.toString())] exists in the 'attrs' of the loading 'Scan'...");
+                            self.sAppXcodeWSDocFilespec         = newAttr.value;
 
+                        case "Project":
+
+                            self.sAppCxProjectName              = newAttr.value;
+
+                        case "CxRestProjectId":
+
+                            self.cAppCxProjectId                = Int(newAttr.value) ?? 0;
+
+                        case "CxSubmittedScanId":
+
+                            self.sAppLastSASTScanId             = newAttr.value;
+
+                        case "ReportType":
+
+                            self.sAppLastSASTScanReportType     = newAttr.value;
+
+                        case "CxRegisteredScanReportId":
+   
+                            self.sAppLastSASTScanReportId       = newAttr.value;
+
+                        case "CxScanReportFilespec":
+
+                            self.sAppLastSASTScanReportFilespec = newAttr.value;
+
+                        default:
+                            
+                            break;
+                        
                     }
 
                     self.appendUniqueAttr(attr: newAttr);
@@ -228,6 +265,7 @@ import Cocoa
                 }
 
             }
+
         }
 
     } // End of init?().

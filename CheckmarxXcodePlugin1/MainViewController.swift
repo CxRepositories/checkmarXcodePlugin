@@ -15,7 +15,7 @@ class MainViewController: NSViewController
     {
         
         static let sClsId          = "MainViewController";
-        static let sClsVers        = "v1.0402";
+        static let sClsVers        = "v1.0403";
         static let sClsDisp        = sClsId+".("+sClsVers+"): ";
         static let sClsCopyRight   = "Copyright (C) Checkmarx 2018-2019. All Rights Reserved.";
         static let bClsTrace       = true;
@@ -35,6 +35,7 @@ class MainViewController: NSViewController
     @IBOutlet weak var nsTFMainViewDisplay:NSTextField!;
     @IBOutlet weak var nsBtnMainSubmitScan:NSButton!;
     @IBOutlet weak var nsBtnMainBindView:NSButton!;
+    @IBOutlet weak var nsBtnMainViewInCxSast:NSButton!;
     @IBOutlet weak var nsBtnMainViewLastReport:NSButton!;
     @IBOutlet weak var nsTVStatusViewDisplay:NSTextView!
     
@@ -43,6 +44,7 @@ class MainViewController: NSViewController
     var bMainButtonsAreEnabled      = false;
     var sMainViewDisplay            = "";
     var sMainViewLastReportFilespec = "";
+    var mvMainLastScan:Scan?        = nil;
     var svMainStatusView:[String]   = Array();
 
     let jsTraceLog:JsTraceLog       = JsTraceLog.sharedJsTraceLog;
@@ -74,6 +76,7 @@ class MainViewController: NSViewController
         asToString.append("'bMainButtonsAreEnabled': [\(self.bMainButtonsAreEnabled)],");
         asToString.append("'sMainViewDisplay': [\(self.sMainViewDisplay)],");
         asToString.append("'sMainViewLastReportFilespec': [\(self.sMainViewLastReportFilespec)],");
+        asToString.append("'mvMainLastScan': [\(String(describing: self.mvMainLastScan))],");
         asToString.append("'svMainStatusView': [\(self.svMainStatusView)],");
         asToString.append("'jsTraceLog': [\(self.jsTraceLog.toString())],");
         asToString.append("'sTraceCls': [\(self.sTraceCls)]");
@@ -175,32 +178,6 @@ class MainViewController: NSViewController
 
     } // End of func buttonMainImagePressed().
 
-    func updateMainViewDisplay()
-    {
-        
-        let sCurrMethod:String = #function;
-        let sCurrMethodDisp    = "'"+sCurrMethod+"'";
-
-        self.jsTraceLog.jsTraceLogMsg(clsName: self.sTraceCls, sTraceClsDisp:sCurrMethodDisp, sTraceClsMsg:"Invoked...");
-
-        if (self.bMainViewInternalTest == true)
-        {
-
-            if (self.sMainViewDisplay.count < 1)
-            {
-
-                self.sMainViewDisplay = ">>> Button 'MainImage' pressed (\(self.cMainImageBtn)) times...";
-
-            }
-
-        }
-
-        self.nsTFMainViewDisplay.stringValue = self.sMainViewDisplay;
-
-        self.jsTraceLog.jsTraceLogMsg(clsName: self.sTraceCls, sTraceClsDisp:sCurrMethodDisp, sTraceClsMsg:"The 'current' 'sMainViewDisplay' is [\(sMainViewDisplay)]...");
-       
-    } // End of func updateMainViewDisplay().
-
     @IBAction func buttonSubmitScanPressed(_ sender: Any) 
     {
 
@@ -209,14 +186,19 @@ class MainViewController: NSViewController
 
         self.jsTraceLog.jsTraceLogMsg(clsName: self.sTraceCls, sTraceClsDisp:sCurrMethodDisp, sTraceClsMsg:"Invoked - 'sender' is [\(sender)]...");
 
-        if (AppDelegate.ClassSingleton.cxAppDelegate != nil)
+        if (CxDataRepo.sharedCxDataRepo.cxDataScans!.scans!.count > 0)
         {
 
-            let newScan:Scan = Scan(scan: CxDataRepo.sharedCxDataRepo.cxDataScans!.scans[0]);
+            if (AppDelegate.ClassSingleton.cxAppDelegate != nil)
+            {
 
-            AppDelegate.ClassSingleton.cxAppDelegate!.insertObject(newScan, inScansAtIndex: CxDataRepo.sharedCxDataRepo.cxDataScans!.scans!.count)
+                let newScan:Scan = Scan(scan: CxDataRepo.sharedCxDataRepo.cxDataScans!.scans[0]);
 
-            _ = AppDelegate.ClassSingleton.cxAppDelegate!.processScanSubmit(scan: newScan);
+                AppDelegate.ClassSingleton.cxAppDelegate!.insertObject(newScan, inScansAtIndex: CxDataRepo.sharedCxDataRepo.cxDataScans!.scans!.count)
+
+                _ = AppDelegate.ClassSingleton.cxAppDelegate!.processScanSubmit(scan: newScan);
+
+            }
 
         }
 
@@ -239,15 +221,56 @@ class MainViewController: NSViewController
         currBind.cxEndpointKey = (cxActiveDataEndpoint != nil) ? cxActiveDataEndpoint!.sCxEndpointName! : "";
         currBind.cxBindOrigin  = "CheckmarxXcodePlugin1.app.MainViewController";
 
-    //  AppDelegate.ClassSingleton.cxAppDelegate!.binds = CxDataRepo.sharedCxDataRepo.cxDataBinds!.insertBind(bind: currBind, at: CxDataRepo.sharedCxDataRepo.cxDataBinds!.binds.count);
         _ = AppDelegate.ClassSingleton.cxAppDelegate!.insertObject(currBind, inBindsAtIndex: CxDataRepo.sharedCxDataRepo.cxDataBinds!.binds.count);
 
         self.jsTraceLog.jsTraceLogMsg(clsName: self.sTraceCls, sTraceClsDisp:sCurrMethodDisp, sTraceClsMsg:"Calling the AppDelegate...");
 
-        _ = AppDelegate.ClassSingleton.cxAppDelegate!.invokeBindOrUnbindViaAPICall(bind: currBind, bCallIsForReportView: false);
+        _ = AppDelegate.ClassSingleton.cxAppDelegate!.invokeBindOrUnbindViaAPICall(bind: currBind, bCallIsForReportView: false, bViewInCxSAST: false);
 
     } // End of func buttonMainBindViewPressed().
+    
+    @IBAction func buttonMainViewInCxSASTPressed(_ sender: Any)
+    {
+        
+        let sCurrMethod:String = #function;
+        let sCurrMethodDisp    = "'"+sCurrMethod+"()'";
 
+        self.jsTraceLog.jsTraceLogMsg(clsName: self.sTraceCls, sTraceClsDisp:sCurrMethodDisp, sTraceClsMsg:"Invoked - 'sender' is [\(sender)]...");
+
+        if (self.mvMainLastScan == nil)
+        {
+
+            if (self.sMainViewLastReportFilespec.count > 0)
+            {
+
+                let currScan:Scan? = CxDataRepo.sharedCxDataRepo.cxDataScans!.locateLastScanForXcodeWSDoc(sXcodeWSDocFilespec: self.sMainViewLastReportFilespec);
+
+                if (currScan != nil)
+                {
+
+                    self.mvMainLastScan = currScan!;
+
+                }
+
+            }
+            else
+            {   
+
+                if (CxDataRepo.sharedCxDataRepo.cxDataScans!.scans!.count > 0)
+                {
+
+                    self.mvMainLastScan = CxDataRepo.sharedCxDataRepo.cxDataScans!.scans![(CxDataRepo.sharedCxDataRepo.cxDataScans!.scans!.count - 1)];
+
+                }
+
+            }
+
+        }
+
+        self.handleMainViewLastReport(bViewInCxSAST: true);
+        
+    } // End of func buttonMainViewInCxSASTPressed().
+    
     @IBAction func buttonMainViewLastReportPressed(_ sender: Any)
     {
 
@@ -256,26 +279,131 @@ class MainViewController: NSViewController
 
         self.jsTraceLog.jsTraceLogMsg(clsName: self.sTraceCls, sTraceClsDisp:sCurrMethodDisp, sTraceClsMsg:"Invoked - 'sender' is [\(sender)]...");
 
-        self.handleMainViewLastReport();
+        if (self.sMainViewLastReportFilespec.count < 1)
+        {
+
+            if (CxDataRepo.sharedCxDataRepo.cxDataScans!.scans!.count > 0)
+            {
+
+                self.mvMainLastScan = CxDataRepo.sharedCxDataRepo.cxDataScans!.scans![(CxDataRepo.sharedCxDataRepo.cxDataScans!.scans!.count - 1)];
+
+                if (self.mvMainLastScan!.sAppLastSASTScanReportFilespec.count > 0)
+                {
+
+                //  self.sMainViewLastReportFilespec = self.mvMainLastScan!.sAppXcodeWSDocFilespec;
+                    self.sMainViewLastReportFilespec = self.mvMainLastScan!.sAppLastSASTScanReportFilespec;
+
+                }
+
+            }
+
+        }
+
+        self.handleMainViewLastReport(bViewInCxSAST: false);
 
     } // End of func buttonMainViewLastReportPressed().
 
-    public func handleMainViewLastReport()
+    public func handleMainViewLastReport(bViewInCxSAST:Bool = false)
     {
 
         let sCurrMethod:String = #function;
         let sCurrMethodDisp    = "'"+sCurrMethod+"()'";
 
-        self.jsTraceLog.jsTraceLogMsg(clsName: self.sTraceCls, sTraceClsDisp:sCurrMethodDisp, sTraceClsMsg:"Invoked...");
+        self.jsTraceLog.jsTraceLogMsg(clsName: self.sTraceCls, sTraceClsDisp:sCurrMethodDisp, sTraceClsMsg:"Invoked - 'bViewInCxSAST' [\(bViewInCxSAST)]...");
+
+        var sFileViewProtocol:String = "file";
+
+        if (bViewInCxSAST == true)
+        {
+
+            let cxActiveDataEndpoint:CxDataEndpoint? = CxDataRepo.sharedCxDataRepo.retrieveActiveCxDataEndpoint();
+
+            if (cxActiveDataEndpoint                       != nil &&
+                cxActiveDataEndpoint!.sHttpProtocol        != nil &&
+                cxActiveDataEndpoint!.sHttpProtocol!.count > 0)
+            {
+
+                sFileViewProtocol = cxActiveDataEndpoint!.sHttpProtocol!;
+
+                if (self.mvMainLastScan != nil)
+                {
+
+                    var cCurrCxProjectId:Int = self.mvMainLastScan!.cAppCxProjectId;
+
+                    if (cCurrCxProjectId < 1)
+                    {
+
+                        let newAttr1:Attr? = self.mvMainLastScan!.locateUniqueAttr(name: "Project");
+
+                        if (newAttr1 != nil)
+                        {
+
+                            cCurrCxProjectId = Int(newAttr1!.value) ?? 0;
+
+                        }
+
+                    }
+
+                    var sCurrLastSASTScanId:String = self.mvMainLastScan!.sAppLastSASTScanId;
+
+                    if (sCurrLastSASTScanId.count < 1)
+                    {
+
+                        let newAttr2:Attr? = self.mvMainLastScan!.locateUniqueAttr(name: "CxSubmittedScanId");
+
+                        if (newAttr2 != nil)
+                        {
+
+                            sCurrLastSASTScanId = newAttr2!.value;
+
+                        }
+
+                    }
+
+                    if (cCurrCxProjectId          > 0 &&
+                        sCurrLastSASTScanId.count > 0)
+                    {
+
+                        var sHttpHostProtocol:String = cxActiveDataEndpoint!.sHttpHost!;
+
+                        if (cxActiveDataEndpoint!.sHttpPort        != nil &&
+                            cxActiveDataEndpoint!.sHttpPort!.count > 0)
+                        {
+
+                            sHttpHostProtocol += ":\(cxActiveDataEndpoint!.sHttpPort!)";
+
+                        }
+
+                    //  URL: http://localhost:8080/CxWebClient/ViewerMain.aspx?scanId=1450376&ProjectID=390078
+
+                        let sHttpURL = "\(sFileViewProtocol)://\(sHttpHostProtocol)/CxWebClient/ViewerMain.aspx?scanId=\(sCurrLastSASTScanId)&ProjectID=\(cCurrCxProjectId)";
+                        
+                        NSWorkspace.shared.open(URL(string: sHttpURL)!);
+
+                        let sMainProcessorStatusMsg = "Launched the URL [\(sHttpURL)] to view in the 'default' protocol handler (1)...";
+
+                        self.jsTraceLog.jsTraceLogMsg(clsName: self.sTraceCls, sTraceClsDisp:sCurrMethodDisp, sTraceClsMsg:sMainProcessorStatusMsg);
+
+                        self.updateMainStatusView(sMainStatusView: sMainProcessorStatusMsg);
+
+                        return;
+
+                    }
+
+                }
+
+            }
+
+        }
 
         var sCurrLastSASTScanReportFilespec = self.sMainViewLastReportFilespec;
 
         if (sCurrLastSASTScanReportFilespec.count > 0)
         {
 
-            NSWorkspace.shared.open(URL(string: "file://\(sCurrLastSASTScanReportFilespec)")!);
+            NSWorkspace.shared.open(URL(string: "\(sFileViewProtocol)://\(sCurrLastSASTScanReportFilespec)")!);
 
-            let sMainProcessorStatusMsg = "Launched the file [\(sCurrLastSASTScanReportFilespec)] to view in the 'default' extension handler...";
+            let sMainProcessorStatusMsg = "Launched the file [\(sCurrLastSASTScanReportFilespec)] to view in the 'default' protocol/extension handler (2)...";
 
             self.jsTraceLog.jsTraceLogMsg(clsName: self.sTraceCls, sTraceClsDisp:sCurrMethodDisp, sTraceClsMsg:sMainProcessorStatusMsg);
 
@@ -433,9 +561,9 @@ class MainViewController: NSViewController
 
                 self.sMainViewLastReportFilespec = sCurrLastSASTScanReportFilespec;
                 
-                NSWorkspace.shared.open(URL(string: "file://\(sCurrLastSASTScanReportFilespec)")!);
+                NSWorkspace.shared.open(URL(string: "\(sFileViewProtocol)://\(sCurrLastSASTScanReportFilespec)")!);
 
-                let sMainProcessorStatusMsg = "Launched the file [\(sCurrLastSASTScanReportFilespec)] to view in the 'default' extension handler...";
+                let sMainProcessorStatusMsg = "Launched the file [\(sCurrLastSASTScanReportFilespec)] to view in the 'default' protocol/extension handler (3)...";
 
                 self.jsTraceLog.jsTraceLogMsg(clsName: self.sTraceCls, sTraceClsDisp:sCurrMethodDisp, sTraceClsMsg:sMainProcessorStatusMsg);
 
@@ -447,6 +575,39 @@ class MainViewController: NSViewController
 
     } // End of func handleMainViewLastReport().
     
+    func updateMainViewDisplay(sMainViewDisplay:String? = nil)
+    {
+        
+        let sCurrMethod:String = #function;
+        let sCurrMethodDisp    = "'"+sCurrMethod+"'";
+
+        self.jsTraceLog.jsTraceLogMsg(clsName: self.sTraceCls, sTraceClsDisp:sCurrMethodDisp, sTraceClsMsg:"Invoked - 'sMainViewDisplay' [\(String(describing: sMainViewDisplay))]...");
+
+        if (sMainViewDisplay != nil)
+        {
+
+            self.sMainViewDisplay = sMainViewDisplay!;
+
+        }
+
+        if (self.bMainViewInternalTest == true)
+        {
+
+            if (self.sMainViewDisplay.count < 1)
+            {
+
+                self.sMainViewDisplay = ">>> Button 'MainImage' pressed (\(self.cMainImageBtn)) times...";
+
+            }
+
+        }
+
+        self.nsTFMainViewDisplay.stringValue = self.sMainViewDisplay;
+
+        self.jsTraceLog.jsTraceLogMsg(clsName: self.sTraceCls, sTraceClsDisp:sCurrMethodDisp, sTraceClsMsg:"The 'current' 'sMainViewDisplay' is [\(self.sMainViewDisplay)]...");
+       
+    } // End of func updateMainViewDisplay().
+
     func updateMainStatusView(sMainStatusView:String = "")
     {
 
@@ -461,7 +622,6 @@ class MainViewController: NSViewController
 
         let posTVStatusViewScoll = (NSMaxY(self.nsTVStatusViewDisplay.visibleRect) - NSMaxY(self.nsTVStatusViewDisplay.bounds));
 
-    //  self.jsTraceLog.jsTraceLogMsg(clsName: self.sTraceCls, sTraceClsDisp:sCurrMethodDisp, sTraceClsMsg:"The 'current' 'svMainStatusView' 'position' is (\(posTVStatusViewScoll)):(\(posTVStatusViewScoll.magnitude)) with [\(self.svMainStatusView)]...");
         self.jsTraceLog.jsTraceLogMsg(clsName: self.sTraceCls, sTraceClsDisp:sCurrMethodDisp, sTraceClsMsg:"The 'current' 'svMainStatusView' 'position' is (\(posTVStatusViewScoll)):(\(posTVStatusViewScoll.magnitude)) with (\(self.svMainStatusView.count)) byte(s) in the 'view'...");
 
         if (abs(posTVStatusViewScoll) < 30.0)

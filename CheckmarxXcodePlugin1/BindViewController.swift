@@ -16,7 +16,7 @@ class BindViewController: NSViewController, NSComboBoxDelegate
     {
         
         static let sClsId          = "BindViewController";
-        static let sClsVers        = "v1.0402";
+        static let sClsVers        = "v1.0403";
         static let sClsDisp        = sClsId+".("+sClsVers+"): ";
         static let sClsCopyRight   = "Copyright (C) Checkmarx 2018-2019. All Rights Reserved.";
         static let bClsTrace       = true;
@@ -135,18 +135,6 @@ class BindViewController: NSViewController, NSComboBoxDelegate
         
     }
 
-//  public func queueBind(bind: Bind)
-//  {
-//
-//      let sCurrMethod:String = #function;
-//      let sCurrMethodDisp    = "'"+sCurrMethod+"()'";
-//
-//      self.jsTraceLog.jsTraceLogMsg(clsName: self.sTraceCls, sTraceClsDisp:sCurrMethodDisp, sTraceClsMsg:"Invoked...");
-//
-//      // ToDo: ...Add code here to handle the 'queuing' of a Bind object into this controller...
-//
-//  } // End of func queueBind().
-
     @IBAction func buttonBindMainImagePressed(_ sender: Any)
     {
 
@@ -223,7 +211,7 @@ class BindViewController: NSViewController, NSComboBoxDelegate
 
         self.indexBindSelected = 0;
 
-        if (CxDataRepo.sharedCxDataRepo.cxDataBinds!.binds!.count > 1)
+        if (CxDataRepo.sharedCxDataRepo.cxDataBinds!.binds!.count > 0)
         {
 
             for (i, bindEntry) in CxDataRepo.sharedCxDataRepo.cxDataBinds!.binds!.enumerated()
@@ -251,11 +239,24 @@ class BindViewController: NSViewController, NSComboBoxDelegate
         if (self.sCurrentBindEndpointKey.count < 1)
         {
 
-            self.sCurrentBindEndpointKey = CxDataRepo.sharedCxDataRepo.retrieveActiveCxDataEndpoint()!.sCxEndpointName ?? "";
+            let cxActiveDataEndpoint:CxDataEndpoint? = CxDataRepo.sharedCxDataRepo.retrieveActiveCxDataEndpoint();
+
+            if (cxActiveDataEndpoint != nil)
+            {
+
+                self.sCurrentBindEndpointKey = cxActiveDataEndpoint!.sCxEndpointName ?? "";
+
+            }
+            else
+            {
+
+                self.sCurrentBindEndpointKey = "";
+
+            }
 
         }
 
-        if (CxDataRepo.sharedCxDataRepo.dictCxDataEndpoints.count > 1)
+        if (CxDataRepo.sharedCxDataRepo.dictCxDataEndpoints.count > 0)
         {
 
             for (i, dictEntry) in CxDataRepo.sharedCxDataRepo.dictCxDataEndpoints.enumerated()
@@ -485,6 +486,13 @@ extension BindViewController: NSOutlineViewDataSource
         let sCurrMethodDisp    = "'"+sCurrMethod+"()'";
 
         self.jsTraceLog.jsTraceLogMsg(clsName: self.sTraceCls, sTraceClsDisp:sCurrMethodDisp, sTraceClsMsg:"Invoked - 'outlineView' [\(String(describing: outlineView))] - 'index' [\(String(describing: index))] - 'item' [\(String(describing: item))]...");
+
+        if (self.asCxDataBindIds.count < 1)
+        {
+
+            return "";
+
+        }
 
         let sCxDataBindId = self.asCxDataBindIds[index];
 

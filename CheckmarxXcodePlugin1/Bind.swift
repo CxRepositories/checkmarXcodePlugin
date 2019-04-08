@@ -15,7 +15,7 @@ import Cocoa
     {
         
         static let sClsId          = "Bind";
-        static let sClsVers        = "v1.0402";
+        static let sClsVers        = "v1.0403";
         static let sClsDisp        = sClsId+".("+sClsVers+"): ";
         static let sClsCopyRight   = "Copyright (C) Checkmarx 2018-2019. All Rights Reserved.";
         static let bClsTrace       = true;
@@ -154,7 +154,7 @@ import Cocoa
         self.cxEndpointKey                = plistEntry["CxDataEndpointKey"]            as? String ?? "";
         self.cxProjectName                = plistEntry["CxProjectName"]                as? String ?? "";
         let cxProjectIdEntry              = plistEntry["CxProjectId"]                  as? String ?? "0";
-        let cxProjectIdValue              = Int(cxProjectIdEntry) ?? 0;
+        let cxProjectIdValue              = Int(cxProjectIdEntry)                                 ?? 0;
         self.cxProjectId                  = cxProjectIdValue;
         self.cxBindOrigin                 = plistEntry["CxBindOrigin"]                 as? String ?? "";
         self.cxLastSASTScanReportFilespec = plistEntry["CxLastSASTScanReportFilespec"] as? String ?? "";
@@ -268,13 +268,41 @@ import Cocoa
 
                 CxDataRepo.sharedCxDataRepo.cxDataBinds!.currentScanOnHold = nil;
 
-                _ = cxAppDelegate.invokeBindOrUnbindViaAPICall(bind: self, bCallIsForReportView: true);
+                _ = cxAppDelegate.invokeBindOrUnbindViaAPICall(bind: self, bCallIsForReportView: true, bViewInCxSAST: false);
 
             }
 
         }
 
     } // End of func viewBindLastSASTScanReport().
+
+    @objc func viewResultsInCxSAST(_ command: NSScriptCommand) 
+    {
+
+        let sCurrMethod:String = #function;
+        let sCurrMethodDisp    = "'"+sCurrMethod+"()'";
+
+        self.jsTraceLog.jsTraceLogMsg(clsName: self.sTraceCls, sTraceClsDisp:sCurrMethodDisp, sTraceClsMsg:"Invoked - 'self' is [\(self)] - 'command' [\(command)]...");
+
+        if let bind = command.evaluatedReceivers as? Bind
+        {
+
+            if self == bind
+            {
+
+                let cxAppDelegate:AppDelegate = AppDelegate.ClassSingleton.cxAppDelegate!;
+
+                self.jsTraceLog.jsTraceLogMsg(clsName: self.sTraceCls, sTraceClsDisp:sCurrMethodDisp, sTraceClsMsg:"Calling the 'cxAppDelegate' [\(cxAppDelegate)]...");
+
+                CxDataRepo.sharedCxDataRepo.cxDataBinds!.currentScanOnHold = nil;
+
+                _ = cxAppDelegate.invokeBindOrUnbindViaAPICall(bind: self, bCallIsForReportView: true, bViewInCxSAST: true);
+
+            }
+
+        }
+
+    } // End of func viewResultsInCxSAST().
 
     @objc func handleBindOrUnbind(_ command: NSScriptCommand) 
     {
@@ -296,7 +324,7 @@ import Cocoa
 
                 CxDataRepo.sharedCxDataRepo.cxDataBinds!.currentScanOnHold = nil;
 
-                _ = cxAppDelegate.invokeBindOrUnbindViaAPICall(bind: self, bCallIsForReportView: false);
+                _ = cxAppDelegate.invokeBindOrUnbindViaAPICall(bind: self, bCallIsForReportView: false, bViewInCxSAST: false);
 
             }
 

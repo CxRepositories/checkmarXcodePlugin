@@ -17,7 +17,7 @@ class ScanValidator: NSObject
     {
         
         static let sClsId          = "ScanValidator";
-        static let sClsVers        = "v1.0402";
+        static let sClsVers        = "v1.0403";
         static let sClsDisp        = sClsId+".("+sClsVers+"): ";
         static let sClsCopyRight   = "Copyright (C) Checkmarx 2018-2019. All Rights Reserved.";
         static let bClsTrace       = true;
@@ -145,6 +145,13 @@ class ScanValidator: NSObject
 
             self.jsTraceLog.jsTraceLogMsg(clsName: self.sTraceCls, sTraceClsDisp:sCurrMethodDisp, sTraceClsMsg:"The processing of the 'scan' Submission failed - there is NO WorkSpace Document or Directory to scan from - Error!");
 
+            if (MainViewController.ClassSingleton.cxAppMainViewController != nil)
+            {
+
+                MainViewController.ClassSingleton.cxAppMainViewController!.updateMainViewDisplay(sMainViewDisplay: ">>> ERROR: Unable to locate an Xcode WorkSpace Document...");
+
+            }
+
             return false;
 
         }
@@ -171,6 +178,8 @@ class ScanValidator: NSObject
 
             self.jsTraceLog.jsTraceLogMsg(clsName: self.sTraceCls, sTraceClsDisp:sCurrMethodDisp, sTraceClsMsg:"The processing of the 'scan' Submission failed - there is NO 'active' CxDataEndpoint to scan to - Error!");
 
+            MainViewController.ClassSingleton.cxAppMainViewController!.updateMainViewDisplay(sMainViewDisplay: ">>> ERROR: NO active CxServer URL was found - use 'Preferences' to set one up...");
+
             return false;
 
         }
@@ -185,19 +194,19 @@ class ScanValidator: NSObject
 
             self.jsTraceLog.jsTraceLogMsg(clsName: self.sTraceCls, sTraceClsDisp:sCurrMethodDisp, sTraceClsMsg:"The processing of the 'scan' Submission failed - NO  'active' Bind for 'key' [\(self.scan!.sAppXcodeWSDocFilespec)] and 'endpoint' [\(String(describing: cxActiveDataEndpoint!.sCxEndpointName))] found - setting up a new 'Bind' for it...");
 
+            MainViewController.ClassSingleton.cxAppMainViewController!.updateMainViewDisplay(sMainViewDisplay: ">>> ERROR: NO CxServer URL/Bind was found - setup a Bind relationship to continue...");
+
             let currBind:Bind = Bind();
 
             currBind.key           = self.scan!.sAppXcodeWSDocFilespec;
             currBind.cxEndpointKey = cxActiveDataEndpoint!.sCxEndpointName!;
             currBind.cxBindOrigin  = "CheckmarxXcodePlugin1.app";
 
-        //  AppDelegate.ClassSingleton.cxAppDelegate!.binds = CxDataRepo.sharedCxDataRepo.cxDataBinds!.insertBind(bind: currBind, at: CxDataRepo.sharedCxDataRepo.cxDataBinds!.binds.count);
             _ = AppDelegate.ClassSingleton.cxAppDelegate!.insertObject(currBind, inBindsAtIndex: CxDataRepo.sharedCxDataRepo.cxDataBinds!.binds.count);
-
 
             CxDataRepo.sharedCxDataRepo.cxDataBinds!.currentScanOnHold = self.scan;
 
-            _ = AppDelegate.ClassSingleton.cxAppDelegate!.invokeBindOrUnbindViaAPICall(bind: currBind, bCallIsForReportView: false);
+            _ = AppDelegate.ClassSingleton.cxAppDelegate!.invokeBindOrUnbindViaAPICall(bind: currBind, bCallIsForReportView: false, bViewInCxSAST: false);
 
             return false;
 
@@ -209,11 +218,11 @@ class ScanValidator: NSObject
             cxActiveDataBind!.cxProjectId         < 0)
         {
 
-            self.jsTraceLog.jsTraceLogMsg(clsName: self.sTraceCls, sTraceClsDisp:sCurrMethodDisp, sTraceClsMsg:"The processing of the 'scan' Submission failed - The 'current' Bind 'currBind' [\(cxActiveDataBind!.toString())] has NO Project Name/Id - sending the 'Bind' to be fixed...");
+            self.jsTraceLog.jsTraceLogMsg(clsName: self.sTraceCls, sTraceClsDisp:sCurrMethodDisp, sTraceClsMsg:"The processing of the 'scan' Submission failed - the 'current' Bind 'currBind' [\(cxActiveDataBind!.toString())] has NO Project Name/Id - sending the 'Bind' to be fixed...");
 
             CxDataRepo.sharedCxDataRepo.cxDataBinds!.currentScanOnHold = self.scan;
 
-            _ = AppDelegate.ClassSingleton.cxAppDelegate!.invokeBindOrUnbindViaAPICall(bind: cxActiveDataBind!, bCallIsForReportView: false);
+            _ = AppDelegate.ClassSingleton.cxAppDelegate!.invokeBindOrUnbindViaAPICall(bind: cxActiveDataBind!, bCallIsForReportView: false, bViewInCxSAST: false);
 
             return false;
 
@@ -269,6 +278,8 @@ class ScanValidator: NSObject
       
             self.jsTraceLog.jsTraceLogMsg(clsName: self.sTraceCls, sTraceClsDisp:sCurrMethodDisp, sTraceClsMsg:"The processing of the 'scan' Submission failed ('bProcessScanSubmissionOk' [\(bProcessScanSubmissionOk)]) - Error!");
       
+            MainViewController.ClassSingleton.cxAppMainViewController!.updateMainViewDisplay(sMainViewDisplay: ">>> ERROR: The Scan submission failed...");
+
             return false;
       
         }
@@ -295,7 +306,7 @@ class ScanValidator: NSObject
         //       skip all of the AppleScript talking to Xcode to try to get this value. If it doesn't exist,
         //       then just clear the field and let the Xcode flag determine whether or not to use AppleScript.
 
-        if (self.scan!.sAppXcodeWSDocFilespec.count > 1)
+        if (self.scan!.sAppXcodeWSDocFilespec.count > 0)
         {
 
             if (JsFileIO.fileExists(sFilespec: self.scan!.sAppXcodeWSDocFilespec) == false)

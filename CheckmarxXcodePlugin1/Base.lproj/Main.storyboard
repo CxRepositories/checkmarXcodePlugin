@@ -697,14 +697,14 @@
             </objects>
             <point key="canvasLocation" x="-592" y="-140"/>
         </scene>
-        <!--Checkmarx Scan Log Window Controller-->
+        <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController storyboardIdentifier="MainViewWindowController" showSeguePresentationStyle="single" id="B8D-0N-5wS" sceneMemberID="viewController">
                     <window key="window" title="CheckmarxXcodePlugin1" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA" userLabel="AppWindow">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="196" y="240" width="480" height="313"/>
+                        <rect key="contentRect" x="140" y="240" width="593" height="313"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                         <connections>
                             <outlet property="delegate" destination="B8D-0N-5wS" id="98r-iN-zZc"/>
@@ -716,18 +716,29 @@
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-836" y="194"/>
+            <point key="canvasLocation" x="-835.5" y="193.5"/>
         </scene>
         <!--Checkmarx Scan Log-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
                 <viewController title="Checkmarx Scan Log" storyboardIdentifier="MainViewController" showSeguePresentationStyle="single" id="XfG-lQ-9wD" customClass="MainViewController" customModule="CheckmarxXcodePlugin1" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl" userLabel="MainView">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="314"/>
+                        <rect key="frame" x="0.0" y="0.0" width="581" height="314"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0rS-N8-S8R" userLabel="Checkmarx Scan Log">
-                                <rect key="frame" x="68" y="272" width="392" height="22"/>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yrK-Wb-Eug">
+                                <rect key="frame" x="12" y="253" width="48" height="48"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSApplicationIcon" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyUpOrDown" inset="2" id="e1t-2n-SaL">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="buttonMainImagePressed:" target="XfG-lQ-9wD" id="RzY-Vr-q8I"/>
+                                </connections>
+                            </button>
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0rS-N8-S8R" userLabel="Main VIew Display">
+                                <rect key="frame" x="68" y="272" width="493" height="22"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="Xho-S9-BRT">
                                     <font key="font" metaFont="system"/>
@@ -736,9 +747,9 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S11-mE-O9f">
-                                <rect key="frame" x="62" y="235" width="126" height="32"/>
+                                <rect key="frame" x="61" y="235" width="86" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" title="'submit' Scan!" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="lQi-Ao-0pl">
+                                <buttonCell key="cell" type="push" title="Test Scan" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="lQi-Ao-0pl">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -746,8 +757,30 @@
                                     <action selector="buttonSubmitScanPressed:" target="XfG-lQ-9wD" id="rVH-AU-LcJ"/>
                                 </connections>
                             </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="syE-y3-vPu" userLabel="Ns Btn Bind or Unbind">
+                                <rect key="frame" x="140" y="235" width="59" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Bind" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="OpL-Ek-BOL">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="buttonMainBindViewPressed:" target="XfG-lQ-9wD" id="tMG-lf-MZ7"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IOW-zW-GAA" userLabel="Ns Btn View in CxSast">
+                                <rect key="frame" x="260" y="235" width="160" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="View results in CxSast" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="3lN-H1-G9W">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="buttonMainViewInCxSASTPressed:" target="XfG-lQ-9wD" id="Lbb-SF-M0t"/>
+                                </connections>
+                            </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k0Q-1E-gNa" userLabel="Ns Btn Main Report View">
-                                <rect key="frame" x="311" y="235" width="155" height="32"/>
+                                <rect key="frame" x="414" y="235" width="153" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="View last scan report" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="5Zf-8A-gER">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -759,23 +792,23 @@
                                 </connections>
                             </button>
                             <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="g03-Oi-c5D">
-                                <rect key="frame" x="20" y="229" width="440" height="5"/>
+                                <rect key="frame" x="20" y="229" width="540" height="5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </box>
                             <scrollView fixedFrame="YES" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="duQ-so-i1h">
-                                <rect key="frame" x="20" y="20" width="440" height="200"/>
+                                <rect key="frame" x="20" y="20" width="541" height="200"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <clipView key="contentView" ambiguous="YES" drawsBackground="NO" copiesOnScroll="NO" id="Pyi-fG-0c6">
-                                    <rect key="frame" x="0.0" y="0.0" width="425" height="200"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="526" height="200"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textView ambiguous="YES" importsGraphics="NO" richText="NO" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="RY2-o5-2B9" userLabel="Ns TV Status View Display">
-                                            <rect key="frame" x="0.0" y="0.0" width="425" height="200"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="526" height="200"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            <size key="minSize" width="425" height="200"/>
-                                            <size key="maxSize" width="440" height="10000000"/>
+                                            <size key="minSize" width="526" height="200"/>
+                                            <size key="maxSize" width="541" height="10000000"/>
                                             <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                         </textView>
                                     </subviews>
@@ -785,55 +818,34 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="Zf5-hn-0bQ">
-                                    <rect key="frame" x="425" y="0.0" width="15" height="200"/>
+                                    <rect key="frame" x="526" y="0.0" width="15" height="200"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="syE-y3-vPu" userLabel="Ns Btn Bind or Unbind">
-                                <rect key="frame" x="189" y="235" width="122" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" title="Bind or Unbind" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="OpL-Ek-BOL">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="buttonMainBindViewPressed:" target="XfG-lQ-9wD" id="tMG-lf-MZ7"/>
-                                </connections>
-                            </button>
-                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yrK-Wb-Eug">
-                                <rect key="frame" x="20" y="267" width="32" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSApplicationIcon" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyUpOrDown" inset="2" id="e1t-2n-SaL">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="buttonMainImagePressed:" target="XfG-lQ-9wD" id="RzY-Vr-q8I"/>
-                                </connections>
-                            </button>
                         </subviews>
                     </view>
                     <connections>
                         <outlet property="nsBtnMainBindView" destination="syE-y3-vPu" id="NnX-hW-dMF"/>
                         <outlet property="nsBtnMainImage" destination="yrK-Wb-Eug" id="3o4-gg-tAP"/>
                         <outlet property="nsBtnMainSubmitScan" destination="S11-mE-O9f" id="cf1-VD-XjE"/>
+                        <outlet property="nsBtnMainViewInCxSast" destination="IOW-zW-GAA" id="Ajl-2s-sCB"/>
                         <outlet property="nsBtnMainViewLastReport" destination="k0Q-1E-gNa" id="Jwo-rj-SzQ"/>
-                        <outlet property="nsTFMainViewDisplay" destination="0rS-N8-S8R" id="jux-e3-vEh"/>
+                        <outlet property="nsTFMainViewDisplay" destination="0rS-N8-S8R" id="P6x-Af-KXG"/>
                         <outlet property="nsTVStatusViewDisplay" destination="RY2-o5-2B9" id="omj-fC-i66"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-836" y="642"/>
+            <point key="canvasLocation" x="-836.5" y="685"/>
         </scene>
-        <!--Checkmarx Log History Window Controller-->
+        <!--Window Controller-->
         <scene sceneID="nwd-cS-p8D">
             <objects>
                 <windowController showSeguePresentationStyle="single" id="85W-x0-uKJ" sceneMemberID="viewController">
                     <window key="window" title="Checkmarx Log History" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="hsX-j7-Dfx">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="320" y="343" width="480" height="270"/>
+                        <rect key="contentRect" x="283" y="343" width="552" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="2048" height="1129"/>
                         <connections>
                             <outlet property="delegate" destination="85W-x0-uKJ" id="Y64-S5-K22"/>
@@ -845,7 +857,7 @@
                 </windowController>
                 <customObject id="akR-pd-uVG" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-244" y="291"/>
+            <point key="canvasLocation" x="-52" y="236"/>
         </scene>
         <!--Checkmarx Log History-->
         <scene sceneID="KZt-NW-mYb">
@@ -995,9 +1007,9 @@
                 </viewController>
                 <customObject id="Nor-ol-9bo" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-244" y="883"/>
+            <point key="canvasLocation" x="-51" y="839"/>
         </scene>
-        <!--Checkmarx Preferences Window Controller-->
+        <!--Window Controller-->
         <scene sceneID="nq3-Ia-wo6">
             <objects>
                 <windowController showSeguePresentationStyle="single" id="KyB-6N-SYj" sceneMemberID="viewController">
@@ -1016,7 +1028,7 @@
                 </windowController>
                 <customObject id="O80-sh-X5x" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="391" y="152"/>
+            <point key="canvasLocation" x="648" y="145"/>
         </scene>
         <!--Checkmarx Preferences-->
         <scene sceneID="elK-vL-G9H">
@@ -1287,7 +1299,7 @@ Gw
                                 </connections>
                             </button>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DuB-Qb-e4a" userLabel="Prefs Btn Image">
-                                <rect key="frame" x="20" y="15" width="32" height="32"/>
+                                <rect key="frame" x="8" y="2" width="48" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSApplicationIcon" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyUpOrDown" inset="2" id="VnT-6F-D2Q">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1318,9 +1330,9 @@ Gw
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="390.5" y="738.5"/>
+            <point key="canvasLocation" x="648" y="694"/>
         </scene>
-        <!--Checkmarx Advanced Binds Window Controller-->
+        <!--Window Controller-->
         <scene sceneID="JMj-xW-Bie">
             <objects>
                 <windowController storyboardIdentifier="AdvancedBindViewWindow" showSeguePresentationStyle="single" id="Kx3-kW-hDz" sceneMemberID="viewController">
@@ -1339,7 +1351,7 @@ Gw
                 </windowController>
                 <customObject id="RBR-jg-hdk" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1149" y="95"/>
+            <point key="canvasLocation" x="1373" y="83"/>
         </scene>
         <!--Checkmarx Advanced Binds-->
         <scene sceneID="b8c-wd-c6d">
@@ -1379,7 +1391,7 @@ Gw
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IC4-C2-7fM" userLabel="Bind Endpoint Label">
                                 <rect key="frame" x="260" y="194" width="125" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="Bind CxServer Name:" id="nnd-a0-8kw">
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="CxServer Name:" id="nnd-a0-8kw">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1397,7 +1409,7 @@ Gw
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dh5-Yd-yU3" userLabel="Bind Project Name Label">
                                 <rect key="frame" x="260" y="163" width="125" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="Bind Project Name:" id="Agm-TM-mKW">
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Project Name:" id="Agm-TM-mKW">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1415,7 +1427,7 @@ Gw
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CAN-zp-oIJ" userLabel="Bind Project Id Label">
                                 <rect key="frame" x="260" y="131" width="125" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="Bind Project Id:" id="8bp-wJ-CX9">
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Project Id:" id="8bp-wJ-CX9">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1464,15 +1476,6 @@ Gw
                                     <action selector="buttonBindCancelPressed:" target="2bZ-iZ-KIK" id="SLu-2T-Yu2"/>
                                 </connections>
                             </button>
-                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HoV-KW-zBw" userLabel="Bind Main Display">
-                                <rect key="frame" x="60" y="20" width="583" height="28"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="fRh-uF-g4v">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vjT-S6-qrc">
                                 <rect key="frame" x="20" y="97" width="234" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -1573,7 +1576,7 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dUZ-wM-jdI" userLabel="Bind Btn Image">
-                                <rect key="frame" x="20" y="18" width="32" height="32"/>
+                                <rect key="frame" x="8" y="2" width="48" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSApplicationIcon" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyUpOrDown" inset="2" id="7Nq-Mh-QZN">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1583,6 +1586,15 @@ Gw
                                     <action selector="buttonBindMainImagePressed:" target="2bZ-iZ-KIK" id="u9Q-Rb-1eO"/>
                                 </connections>
                             </button>
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HoV-KW-zBw" userLabel="Bind Main Display">
+                                <rect key="frame" x="59" y="20" width="583" height="28"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="fRh-uF-g4v">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                     </view>
                     <connections>
@@ -1601,9 +1613,9 @@ Gw
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1149" y="565"/>
+            <point key="canvasLocation" x="1373" y="612"/>
         </scene>
-        <!--Checkmarx Bind and Report Window Controller-->
+        <!--Window Controller-->
         <scene sceneID="DLX-gd-tnZ">
             <objects>
                 <windowController storyboardIdentifier="BindReportViewWindow" showSeguePresentationStyle="single" id="0oe-u6-EvZ" sceneMemberID="viewController">
@@ -1734,7 +1746,7 @@ Gw
                                 </connections>
                             </textField>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9ho-p6-D5K" userLabel="Bind-Report Btn Image">
-                                <rect key="frame" x="20" y="15" width="32" height="32"/>
+                                <rect key="frame" x="8" y="2" width="48" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSApplicationIcon" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyUpOrDown" inset="2" id="Poc-sb-jKd">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>

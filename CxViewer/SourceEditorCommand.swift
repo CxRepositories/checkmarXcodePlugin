@@ -16,7 +16,7 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand
     {
         
         static let sClsId          = "SourceEditorCommand";
-        static let sClsVers        = "v1.0402";
+        static let sClsVers        = "v1.0403";
         static let sClsDisp        = sClsId+".("+sClsVers+"): ";
         static let sClsCopyRight   = "Copyright (C) Checkmarx 2018-2019. All Rights Reserved.";
         static let bClsTrace       = true;
@@ -116,6 +116,12 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand
                 sMenuItemName = "View Last Report";
 
                 self.cxXcodePlugin1Bridge!.signalBindViewLastReport();
+
+            case "com.jwebiq.CheckmarxXcodePlugin1.CxViewer.SourceEditorCommand5":
+            
+                sMenuItemName = "View Results in CxSast";
+            
+                self.cxXcodePlugin1Bridge!.signalBindViewResultsInCxSAST();
 
             default:
 

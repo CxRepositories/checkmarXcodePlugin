@@ -16,7 +16,7 @@ class ScanProcessor: NSObject
     {
         
         static let sClsId          = "ScanProcessor";
-        static let sClsVers        = "v1.0402";
+        static let sClsVers        = "v1.0403";
         static let sClsDisp        = sClsId+".("+sClsVers+"): ";
         static let sClsCopyRight   = "Copyright (C) Checkmarx 2018-2019. All Rights Reserved.";
         static let bClsTrace       = true;
@@ -500,9 +500,7 @@ class ScanProcessor: NSObject
                 DispatchQueue.main.async
                 {
 
-                    MainViewController.ClassSingleton.cxAppMainViewController!.sMainViewDisplay = ">>> Scan ID [\(self.scan!.sAppLastSASTScanId)] completed successfully...";
-
-                    MainViewController.ClassSingleton.cxAppMainViewController!.updateMainViewDisplay();
+                    MainViewController.ClassSingleton.cxAppMainViewController!.updateMainViewDisplay(sMainViewDisplay: ">>> Scan ID [\(self.scan!.sAppLastSASTScanId)] completed successfully...");
 
                 }   
 
@@ -518,9 +516,7 @@ class ScanProcessor: NSObject
                 DispatchQueue.main.async
                 {
 
-                    MainViewController.ClassSingleton.cxAppMainViewController!.sMainViewDisplay = ">>> Scan ID [\(self.scan!.sAppLastSASTScanId)] failed - Error!";
-
-                    MainViewController.ClassSingleton.cxAppMainViewController!.updateMainViewDisplay();
+                    MainViewController.ClassSingleton.cxAppMainViewController!.updateMainViewDisplay(sMainViewDisplay: ">>> Scan ID [\(self.scan!.sAppLastSASTScanId)] failed - Error!");
 
                 }   
 
@@ -1418,9 +1414,7 @@ class ScanProcessor: NSObject
                             DispatchQueue.main.async
                             {
 
-                                MainViewController.ClassSingleton.cxAppMainViewController!.sMainViewDisplay = ">>> Scan ID [\(self.scan!.sAppLastSASTScanId)] submitted...";
-
-                                MainViewController.ClassSingleton.cxAppMainViewController!.updateMainViewDisplay();
+                                MainViewController.ClassSingleton.cxAppMainViewController!.updateMainViewDisplay(sMainViewDisplay: ">>> Scan ID [\(self.scan!.sAppLastSASTScanId)] submitted...");
 
                             }   
 
@@ -2020,9 +2014,7 @@ class ScanProcessor: NSObject
                             DispatchQueue.main.async
                             {
 
-                                MainViewController.ClassSingleton.cxAppMainViewController!.sMainViewDisplay = ">>> Scan ID [\(self.scan!.sAppLastSASTScanId)] Report ID [\(self.scan!.sAppLastSASTScanReportId)] requested...";
-
-                                MainViewController.ClassSingleton.cxAppMainViewController!.updateMainViewDisplay();
+                                MainViewController.ClassSingleton.cxAppMainViewController!.updateMainViewDisplay(sMainViewDisplay: ">>> Scan ID [\(self.scan!.sAppLastSASTScanId)] Report ID [\(self.scan!.sAppLastSASTScanReportId)] requested...");
 
                             }   
 
@@ -2356,9 +2348,9 @@ class ScanProcessor: NSObject
             {
 
                 MainViewController.ClassSingleton.cxAppMainViewController!.sMainViewLastReportFilespec = self.scan!.sAppLastSASTScanReportFilespec;
-                MainViewController.ClassSingleton.cxAppMainViewController!.sMainViewDisplay            = ">>> Scan ID [\(self.scan!.sAppLastSASTScanId)] Report ID [\(self.scan!.sAppLastSASTScanReportId)] available...";
+                MainViewController.ClassSingleton.cxAppMainViewController!.mvMainLastScan              = self.scan!;
 
-                MainViewController.ClassSingleton.cxAppMainViewController!.updateMainViewDisplay();
+                MainViewController.ClassSingleton.cxAppMainViewController!.updateMainViewDisplay(sMainViewDisplay: ">>> Scan ID [\(self.scan!.sAppLastSASTScanId)] Report ID [\(self.scan!.sAppLastSASTScanReportId)] available...");
 
             }   
 
