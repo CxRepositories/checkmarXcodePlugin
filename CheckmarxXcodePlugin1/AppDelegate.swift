@@ -3,7 +3,7 @@
 //  CheckmarxXcodePlugin1
 //
 //  Created by Daryl Cox on 12/13/18.
-//  Copyright (c) 2018-2019 Checkmarx. All rights reserved.
+//  Copyright (c) 2018-2020 Checkmarx. All rights reserved.
 //
 
 import Cocoa
@@ -16,9 +16,9 @@ import Cocoa
     {
         
         static let sClsId          = "AppDelegate";
-        static let sClsVers        = "v1.0403";
+        static let sClsVers        = "v1.0404";
         static let sClsDisp        = sClsId+".("+sClsVers+"): ";
-        static let sClsCopyRight   = "Copyright (C) Checkmarx 2018-2019. All Rights Reserved.";
+        static let sClsCopyRight   = "Copyright (C) Checkmarx 2018-2020. All Rights Reserved.";
         static let bClsTrace       = true;
         static let bClsFileLog     = true;
         static let sClsLogFilespec = "~/Checkmarx/CheckmarxXcodePlugin1.log";
